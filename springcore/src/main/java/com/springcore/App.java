@@ -3,6 +3,8 @@ package com.springcore;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.springcore.collections.Employe;
+
 /**
  * Hello world!
  *
@@ -21,5 +23,14 @@ public class App
         System.out.println(student1);
         System.out.println(student2);
         System.out.println(student3);
+
+        ApplicationContext context2 = new ClassPathXmlApplicationContext("classpath*:collectionConfig.xml");
+        Employe employe1 =(Employe) context2.getBean("employe1");
+
+        System.out.println(employe1.getEmployeeName());
+        System.out.println(employe1.getAddresses());
+        System.out.println(employe1.getCourses());
+        System.out.println(employe1.getPhones());
+        System.out.println(employe1.getProps());
     }
 }

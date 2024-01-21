@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/beans
+  https://www.springframework.org/schema/beans/spring-beans.xsd"
+      xmlns:context="http://www.springframework.org/schema/context"
+      xmlns:p="http://www.springframework.org/schema/p">
+
+
+  <!-- Setter Injection -->
+
+  <bean class="com.springcore.collections.Employe" id="employe1">
+    <property name="employeeName" value="Harshit Gupta"/>
+
+    <property name="phones">
+        <list>
+            <value>3598300</value>
+            <value>4567654</value>
+            <value>43546532</value>
+            <null/>
+        </list>
+    </property>
+
+    <property name="addresses">
+        <set>
+            <value>Pune</value>
+            <value>karera</value>
+            <value>bhopal</value>
+        </set>
+    </property>
+
+    <property name="courses">
+        <map>
+            <entry key="Python" value="2 months"></entry>
+            <entry key="Java" value="4 months"></entry>
+            <entry key="C" value="1 months"></entry>
+        </map>
+    </property>
+
+    <property name="props">
+        <props>
+            <prop key="name">harshit</prop>
+            <prop key="githubName">harshitg123</prop>
+        </props>
+    </property>
+  </bean>
+
+</beans>
