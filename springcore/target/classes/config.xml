@@ -6,6 +6,10 @@
       xmlns:context="http://www.springframework.org/schema/context"
       xmlns:p="http://www.springframework.org/schema/p">
 
+
+  <!-- Setter Injection -->
+
+  <!-- Bean 1 Option 1 -->
   <bean class="com.springcore.Student" id="student1">
     <property name="studentId">
       <value>3244</value>
@@ -17,4 +21,19 @@
       <value>USA</value>
     </property>
   </bean>
+
+  <!-- Bean 2 Option 2 -->
+  <bean class="com.springcore.Student" id="student2">
+    <property name="studentId" value="3111"/>
+    <property name="studentName" value="Jana Duo"/>
+    <property name="studentAddress" value="UK"/>
+  </bean>
+
+  <!-- Bean 3 Option 3 -->
+  <bean class="com.springcore.Student" 
+        id="student3"
+        p:studentId="3333"
+        p:studentName="Harshit Gupta"
+        p:studentAddress="Pune"/>
+
 </beans>
