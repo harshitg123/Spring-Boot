@@ -4,6 +4,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.springcore.collections.Employe;
+import com.springcore.reference.A;
 
 /**
  * Hello world!
@@ -32,5 +33,11 @@ public class App
         System.out.println(employe1.getCourses());
         System.out.println(employe1.getPhones());
         System.out.println(employe1.getProps());
+
+        ApplicationContext context3 = new ClassPathXmlApplicationContext("classpath*:referenceConfig.xml");
+        A aObj = (A) context3.getBean("Aref");
+
+        System.out.println(aObj.getX());
+        System.out.println(aObj.getObj().getY());
     }
 }
