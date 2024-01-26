@@ -4,6 +4,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.springcore.collections.Employe;
+import com.springcore.constructor.Person;
 import com.springcore.reference.A;
 
 /**
@@ -39,5 +40,10 @@ public class App
 
         System.out.println(aObj.getX());
         System.out.println(aObj.getObj().getY());
+
+
+        ApplicationContext context4 = new ClassPathXmlApplicationContext("classpath*:constructorConfig.xml");
+        Person person = (Person) context4.getBean("person");
+        System.out.println(person);
     }
 }
