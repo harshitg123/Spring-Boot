@@ -5,6 +5,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.springcore.collections.Employe;
 import com.springcore.constructor.Person;
+import com.springcore.constructor.AmbigutyProblem.Addition;
 import com.springcore.reference.A;
 
 /**
@@ -45,5 +46,8 @@ public class App
         ApplicationContext context4 = new ClassPathXmlApplicationContext("classpath*:constructorConfig.xml");
         Person person = (Person) context4.getBean("person");
         System.out.println(person);
+
+        Addition add = (Addition) context4.getBean("addition");
+        System.out.println(add.doSum());
     }
 }
