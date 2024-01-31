@@ -1,11 +1,13 @@
 package com.springcore;
 
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.springcore.collections.Employe;
 import com.springcore.constructor.Person;
 import com.springcore.constructor.AmbigutyProblem.Addition;
+import com.springcore.lifecycle.Fruit;
 import com.springcore.reference.A;
 
 /**
@@ -49,5 +51,19 @@ public class App
 
         Addition add = (Addition) context4.getBean("addition");
         System.out.println(add.doSum());
+
+
+        AbstractApplicationContext context5 = new ClassPathXmlApplicationContext("classpath*:lifecycle.xml");
+        Fruit fruit = (Fruit) context5.getBean("fruit");
+        System.out.println(fruit);
+
+        //Will close the context just before the JVM is shutting down for whatever reason.
+        context5.registerShutdownHook();
+
+        // will close the context at the time it is invoked.
+        // context5.close();
+
+        
+
     }
 }
