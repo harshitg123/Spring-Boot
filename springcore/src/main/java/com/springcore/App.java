@@ -53,6 +53,10 @@ public class App
         System.out.println(add.doSum());
 
 
+        // Implementation of bean lifecycle methods
+
+        // 1. Using XML configurations
+
         AbstractApplicationContext context5 = new ClassPathXmlApplicationContext("classpath*:lifecycle.xml");
         Fruit fruit = (Fruit) context5.getBean("fruit");
         System.out.println(fruit);
@@ -62,6 +66,9 @@ public class App
 
         // will close the context at the time it is invoked.
         // context5.close();
+
+
+        // 2. Using Spring Interfaces
 
         
 
