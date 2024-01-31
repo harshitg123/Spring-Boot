@@ -8,6 +8,7 @@ import com.springcore.collections.Employe;
 import com.springcore.constructor.Person;
 import com.springcore.constructor.AmbigutyProblem.Addition;
 import com.springcore.lifecycle.Fruit;
+import com.springcore.lifecycle.Vegitables;
 import com.springcore.reference.A;
 
 /**
@@ -69,7 +70,12 @@ public class App
 
 
         // 2. Using Spring Interfaces
+        Vegitables vegitable = (Vegitables) context5.getBean("vegitable");
+        System.out.println(vegitable);
+        // shutdown hook is already added for context 5 in line no 66
 
+
+        // 3. Using Annotations
         
 
     }

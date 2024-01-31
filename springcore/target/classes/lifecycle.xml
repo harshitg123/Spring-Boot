@@ -18,4 +18,9 @@
     <property name="price" value="34" />
   </bean>
 
+  <bean class="com.springcore.lifecycle.Vegitables" name="vegitable">
+    <property name="name" value="broclie" />
+    <property name="price" value="25" />
+  </bean>
+
 </beans>
