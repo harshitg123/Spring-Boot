@@ -8,6 +8,7 @@ import com.springcore.collections.Employe;
 import com.springcore.constructor.Person;
 import com.springcore.constructor.AmbigutyProblem.Addition;
 import com.springcore.lifecycle.Fruit;
+import com.springcore.lifecycle.Groceries;
 import com.springcore.lifecycle.Vegitables;
 import com.springcore.reference.A;
 
@@ -76,7 +77,9 @@ public class App
 
 
         // 3. Using Annotations
-        
+        Groceries wheat = (Groceries) context5.getBean("groceries");
+        System.out.println(wheat);
+        // shutdown hook is already added for context 5 in line no 66
 
     }
 }
