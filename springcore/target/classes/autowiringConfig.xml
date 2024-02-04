@@ -8,11 +8,18 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
-<bean class="com.springcore.Autowiring.Address" name="address">
+<!-- <bean class="com.springcore.Autowiring.Address" name="address">
   <property name="street" value="datta mandir road" />
+  <property name="city" value="Pune" />
+</bean> -->
+
+<bean class="com.springcore.Autowiring.Address" name="address1">
+  <property name="street" value="Mauli chowk" />
   <property name="city" value="Pune" />
 </bean>
 
-<bean class="com.springcore.Autowiring.Employee" name="employee1" autowire="byName" />
+<!-- <bean class="com.springcore.Autowiring.Employee" name="employee1" autowire="byName" /> -->
+<!-- <bean class="com.springcore.Autowiring.Employee" name="employee1" autowire="byType" /> -->
+<bean class="com.springcore.Autowiring.Employee" name="employee1" autowire="constructor" />
 
 </beans>
