@@ -59,7 +59,7 @@ public class App
 
         // 1. Using XML configurations
 
-        AbstractApplicationContext context5 = new ClassPathXmlApplicationContext("classpath*:lifecycle.xml");
+        AbstractApplicationContext context5 = new ClassPathXmlApplicationContext("classpath*:lifecycleConfig.xml");
         Fruit fruit = (Fruit) context5.getBean("fruit");
         System.out.println(fruit);
 
