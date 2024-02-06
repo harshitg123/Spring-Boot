@@ -10,15 +10,15 @@
 
 <context:annotation-config />
 
-<bean class="com.springcore.Autowiring.Annotation.Address" name="address">
+<bean class="com.springcore.Autowiring.Annotation.Address" name="address1">
   <property name="street" value="datta mandir road" />
   <property name="city" value="Pune" />
 </bean>
 
-<!-- <bean class="com.springcore.Autowiring.Annotation.Address" name="address2">
+<bean class="com.springcore.Autowiring.Annotation.Address" name="address2">
   <property name="street" value="Mauli chowk" />
   <property name="city" value="PCMC" />
-</bean> -->
+</bean>
 
 
 <bean class="com.springcore.Autowiring.Annotation.Employee" name="employee1" />

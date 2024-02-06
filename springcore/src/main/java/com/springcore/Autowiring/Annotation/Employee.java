@@ -1,6 +1,7 @@
 package com.springcore.Autowiring.Annotation;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 public class Employee {
 
@@ -14,6 +15,7 @@ public class Employee {
 
     // Setter injection - Type will check
     @Autowired
+    @Qualifier("address2")
     public void setAddress(Address address) {
         System.out.println("Setter called");
         this.address = address;
