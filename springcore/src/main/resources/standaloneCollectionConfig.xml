@@ -11,16 +11,29 @@
         http://www.springframework.org/schema/util
         http://www.springframework.org/schema/util/spring-util-3.1.xsd">
 
+
+    <!-- standalone list -->
+
     <util:list list-class="java.util.ArrayList" id="friendsList" >
         <value>Ayush</value>
         <value>Kuljeet</value>
         <value>Agam</value>
     </util:list>
 
+    <!-- standalone map -->
+
+    <util:map map-class="java.util.LinkedHashMap" id="fees">
+        <entry key="Spring boot" value="8000"></entry>
+        <entry key="Django" value="5000"></entry>
+        <entry key="hibernate" value="2000"></entry>
+    </util:map>
+
+    <!-- standalone properties -->
+
     <bean class="com.springcore.StandaloneCollections.Person" name="person1">
         <property name="friends" ref="friendsList" />
+        <property name="feesStructure" ref="fees" />
     </bean>
-
   
 
 </beans>

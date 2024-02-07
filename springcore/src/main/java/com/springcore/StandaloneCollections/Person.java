@@ -1,9 +1,18 @@
 package com.springcore.StandaloneCollections;
 
-import java.util.List;
+import java.util.*;
 
 public class Person {
     private List<String> friends;
+    private Map<String, Integer> feesStructure;
+
+    public Map<String, Integer> getFeesStructure() {
+        return feesStructure;
+    }
+
+    public void setFeesStructure(Map<String, Integer> feesStructure) {
+        this.feesStructure = feesStructure;
+    }
 
     public List<String> getFriends() {
         return friends;
@@ -15,6 +24,8 @@ public class Person {
 
     @Override
     public String toString() {
-        return "Person [friends=" + friends + "]";
+        return "Person [friends=" + friends + ", feesStructure=" + feesStructure + "]";
     }
+
+    
 }
