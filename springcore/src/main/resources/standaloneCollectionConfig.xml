@@ -30,9 +30,17 @@
 
     <!-- standalone properties -->
 
+    <util:properties id="dbConfig">
+        <prop key="driver">com.mysql.jdbc.Driver</prop>
+        <prop key="username">harshit</prop>
+        <prop key="password">abc</prop>
+        <prop key="url">mysql:jdbc://localhost:3306/database</prop>
+    </util:properties>
+
     <bean class="com.springcore.StandaloneCollections.Person" name="person1">
         <property name="friends" ref="friendsList" />
         <property name="feesStructure" ref="fees" />
+        <property name="properties" ref="dbConfig" />
     </bean>
   
 

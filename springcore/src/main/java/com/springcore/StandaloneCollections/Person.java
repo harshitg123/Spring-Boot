@@ -5,6 +5,15 @@ import java.util.*;
 public class Person {
     private List<String> friends;
     private Map<String, Integer> feesStructure;
+    private Properties properties;
+
+    public Properties getProperties() {
+        return properties;
+    }
+
+    public void setProperties(Properties properties) {
+        this.properties = properties;
+    }
 
     public Map<String, Integer> getFeesStructure() {
         return feesStructure;
@@ -24,8 +33,9 @@ public class Person {
 
     @Override
     public String toString() {
-        return "Person [friends=" + friends + ", feesStructure=" + feesStructure + "]";
+        return "Person [friends=" + friends + ", feesStructure=" + feesStructure + ", properties=" + properties + "]";
     }
 
+    
     
 }
