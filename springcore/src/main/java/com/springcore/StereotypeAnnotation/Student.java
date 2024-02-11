@@ -1,5 +1,7 @@
 package com.springcore.StereotypeAnnotation;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -15,6 +17,9 @@ public class Student {
     @Value("943590594")
     private String phoneNum;
 
+    @Value("#{address}")
+    private List<String> addresses;
+
     public String getStudentName() {
         return studentName;
     }
@@ -27,8 +32,15 @@ public class Student {
     public void setPhoneNum(String phoneNum) {
         this.phoneNum = phoneNum;
     }
+    public List<String> getAddresses() {
+        return addresses;
+    }
+    public void setAddresses(List<String> addresses) {
+        this.addresses = addresses;
+    }
     @Override
     public String toString() {
         return "Student [studentName=" + studentName + ", phoneNum=" + phoneNum + "]";
     }
+    
 }

@@ -11,5 +11,6 @@ public class Test {
             new ClassPathXmlApplicationContext("com/springcore/StereotypeAnnotation/stereotypeAnnotationConfig.xml");
         Student student = context.getBean("bean", Student.class);
         System.out.println(student);
+        System.out.println(student.getAddresses());
     }
 }
