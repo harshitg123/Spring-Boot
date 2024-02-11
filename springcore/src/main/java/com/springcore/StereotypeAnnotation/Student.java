@@ -3,12 +3,14 @@ package com.springcore.StereotypeAnnotation;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 // if "bean" was not given in component it will use 
 // "student" as default in camel case.
 
 @Component("bean")
+@Scope("prototype")
 public class Student {
 
     @Value("Harshit Gupta")
