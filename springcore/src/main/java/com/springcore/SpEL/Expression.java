@@ -23,6 +23,9 @@ public class Expression {
 
     @Value("#{ new java.lang.Integer(44) }")
     private int rollNum;
+
+    @Value("#{ 8 > 2}") // give kind of regular exp which returns boolean values
+    private boolean isAvailable;
     
     public int getAdd() {
         return add;
@@ -60,11 +63,18 @@ public class Expression {
     public void setRollNum(int rollNum) {
         this.rollNum = rollNum;
     }
+    public boolean isAvailable() {
+        return isAvailable;
+    }
+    public void setAvailable(boolean isAvailable) {
+        this.isAvailable = isAvailable;
+    }
     @Override
     public String toString() {
         return "Expression [add=" + add + ", subtract=" + subtract + ", squareRoot=" + squareRoot + ", piValue="
-                + piValue + ", name=" + name + ", rollNum=" + rollNum + "]";
+                + piValue + ", name=" + name + ", rollNum=" + rollNum + ", isAvailable=" + isAvailable + "]";
     }
+    
     
     
 }
