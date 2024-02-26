@@ -36,6 +36,10 @@
             <ref bean="dbprops"/>
         </property>
     </bean>
+
+    <bean class="com.spring.jdbc.Dao.StudentDaoImpl" name="studentImpl">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
     
 
 </beans>
