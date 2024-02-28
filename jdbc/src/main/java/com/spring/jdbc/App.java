@@ -50,14 +50,19 @@ public class App
 
 
         // DELETE
-        
-        Student studentObj = new Student();
-        studentObj.setId(55);
 
-        int result = studentDao.remove(studentObj);
+        // Student studentObj = new Student();
+        // studentObj.setId(55);
 
-        System.out.println("Total modified data: " + result);
+        // int result = studentDao.remove(studentObj);
 
+        // System.out.println("Total modified data: " + result);
+
+
+        // GET STUDENT DATA SELECT 
+
+        Student student = studentDao.getStudent(34);
+        System.out.println(student);
 
     }
 }

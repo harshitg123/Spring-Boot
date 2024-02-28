@@ -6,4 +6,5 @@ public interface StudentDao {
     public int insert(Student student);
     public int modify(Student student);
     public int remove(Student student);
+    public Student getStudent(int studentId);
 }
