@@ -24,6 +24,8 @@ public class App
         // This will have all the fun to be performed for e.g. insert, delete....
         StudentDao studentDao = context.getBean("studentImpl", StudentDao.class);
 
+        // INSERT
+
         // Student studentObj = new Student();
         
         // studentObj.setId(55);
@@ -34,12 +36,25 @@ public class App
 
         // System.out.println("Number of record inserted: "+ result);
 
+
+        // UPDATE
+
+        // Student studentObj = new Student();
+        // studentObj.setId(55);
+        // studentObj.setName("Kuljeet");
+        // studentObj.setCity("Bhopal");
+
+        // int result = studentDao.modify(studentObj);
+
+        // System.out.println("Total modified data: " + result);
+
+
+        // DELETE
+        
         Student studentObj = new Student();
         studentObj.setId(55);
-        studentObj.setName("Kuljeet");
-        studentObj.setCity("Bhopal");
 
-        int result = studentDao.modify(studentObj);
+        int result = studentDao.remove(studentObj);
 
         System.out.println("Total modified data: " + result);
 
