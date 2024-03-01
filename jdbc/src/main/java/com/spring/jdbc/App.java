@@ -10,7 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import com.spring.jdbc.Dao.StudentDao;
 import com.spring.jdbc.Dao.StudentDaoImpl;
 import com.spring.jdbc.Entity.Student;
-import com.spring.jdbc.JdbcConfiguration.JdbcConfiguration;
+import com.spring.jdbc.JavaConfiguration.JavaConfiguration;
 
 /**
  * Hello world!
@@ -25,7 +25,7 @@ public class App
 
         // ApplicationContext context = new ClassPathXmlApplicationContext("com/spring/jdbc/config.xml");
 
-        ApplicationContext context = new AnnotationConfigApplicationContext(JdbcConfiguration.class);
+        ApplicationContext context = new AnnotationConfigApplicationContext(JavaConfiguration.class);
 
         // This will have all the fun to be performed for e.g. insert, delete....
         StudentDao studentDao = context.getBean("studentImpl", StudentDao.class);
