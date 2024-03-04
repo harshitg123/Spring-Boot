@@ -62,6 +62,7 @@ public class StudentDaoImpl implements StudentDao {
         String query = "select * from student";
         List <Student> result = this.jdbcTemplate.query(query, new RowMapperImpl());
         return result;
+        
     }
     
 }
