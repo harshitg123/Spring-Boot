@@ -4,5 +4,5 @@ import com.spring.orm.Entity.Student;
 
 public interface StudentDao {
     
-    public Student insert(Student student);
+    public void insert(Student student);
 }

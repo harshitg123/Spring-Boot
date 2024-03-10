@@ -35,4 +35,11 @@ public class Student {
     public void setStudentCity(String studentCity) {
         this.studentCity = studentCity;
     }
+    public Student() {
+    }
+    public Student(long studentId, String studentName, String studentCity) {
+        this.studentId = studentId;
+        this.studentName = studentName;
+        this.studentCity = studentCity;
+    }
 }
