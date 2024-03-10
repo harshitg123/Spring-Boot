@@ -25,6 +25,14 @@ public class StudentDaoImpl implements StudentDao{
     }
 
 
+    @Override
+    public void deleteStudentById(int id) {
+        Student st = new Student();
+        st.setStudentId(id);
+        sessionFactory.getCurrentSession().remove(st);
+    }
+
+
     // public void setSessionFactory(SessionFactory sessionFactory) {
     //     this.sessionFactory = sessionFactory;
     // }

@@ -18,10 +18,10 @@ public class App
     {
         System.out.println( "Application started!" );
 
-        // ApplicationContext context = new AnnotationConfigApplicationContext(HibernateConfig.class);
-        // StudentDao stDaoObj = context.getBean("studentImpl", StudentDao.class);
+        ApplicationContext context = new AnnotationConfigApplicationContext(HibernateConfig.class);
+        StudentDao stDaoObj = context.getBean("studentImpl", StudentDao.class);
 
-        // Student st = new Student();
+        Student st = new Student();
 
         // st.setStudentId(34);
         // st.setStudentName("Ayush Joshi");
@@ -29,15 +29,17 @@ public class App
 
         // stDaoObj.insert(st);
 
-        ApplicationContext context = new ClassPathXmlApplicationContext("com/spring/orm/config.xml");
-        StudentDao studentDao = context.getBean("studentDaoImpl", StudentDao.class);
+        stDaoObj.deleteStudentById(55);
 
-        Student st = new Student();
+        // ApplicationContext context = new ClassPathXmlApplicationContext("com/spring/orm/config.xml");
+        // StudentDao studentDao = context.getBean("studentDaoImpl", StudentDao.class);
 
-        st.setStudentId(54);
-        st.setStudentName("Kuljeet Kaur");
-        st.setStudentCity("Bhopal");
+        // Student st = new Student();
 
-        studentDao.insert(st);
+        // st.setStudentId(54);
+        // st.setStudentName("Kuljeet Kaur");
+        // st.setStudentCity("Bhopal");
+
+        // studentDao.insert(st);
     }
 }
