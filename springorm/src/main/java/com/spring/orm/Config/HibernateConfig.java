@@ -1,21 +1,13 @@
 package com.spring.orm.Config;
-
-import java.io.IOException;
 import java.util.Properties;
-
-import javax.sql.DataSource;
-
-import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.spring.orm.Dao.Impl.StudentDaoImpl;
-import com.spring.orm.Entity.Student;
 
 @Configuration
 @EnableTransactionManagement
