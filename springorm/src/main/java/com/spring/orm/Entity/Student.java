@@ -42,4 +42,9 @@ public class Student {
         this.studentName = studentName;
         this.studentCity = studentCity;
     }
+    @Override
+    public String toString() {
+        return "Student [studentId=" + studentId + ", studentName=" + studentName + ", studentCity=" + studentCity
+                + "]";
+    }
 }

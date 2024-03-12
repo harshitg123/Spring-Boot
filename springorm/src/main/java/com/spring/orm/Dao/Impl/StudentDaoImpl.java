@@ -1,5 +1,7 @@
 package com.spring.orm.Dao.Impl;
 
+import java.util.List;
+
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -19,17 +21,39 @@ public class StudentDaoImpl implements StudentDao{
     private SessionFactory sessionFactory;
 
 
+    // Insert record
     @Override
     public void insert(Student student) {
         sessionFactory.getCurrentSession().persist(student);
     }
 
-
+    // Delete record
     @Override
-    public void deleteStudentById(int id) {
+    public void deleteStudentById(int StudentId) {
         Student st = new Student();
-        st.setStudentId(id);
+        st.setStudentId(StudentId);
         sessionFactory.getCurrentSession().remove(st);
+    }
+
+    // Get the single data
+    @Override
+    public Student getStudentById(int StudentId) {
+        Student st = sessionFactory.getCurrentSession().get(Student.class, StudentId);
+        return st;
+    }
+    
+    // Get All the data
+    @Override
+    public List<Student> getStudents(){
+        return sessionFactory.getCurrentSession()
+                             .createQuery("from Student", Student.class)
+                             .list();
+    }
+
+    // Update the given data
+    @Override
+    public Student updateStudent(Student student){
+        return sessionFactory.getCurrentSession().merge(student);
     }
 
 

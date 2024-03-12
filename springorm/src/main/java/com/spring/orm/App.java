@@ -29,7 +29,7 @@ public class App
 
         // stDaoObj.insert(st);
 
-        stDaoObj.deleteStudentById(55);
+        // stDaoObj.deleteStudentById(55);
 
         // ApplicationContext context = new ClassPathXmlApplicationContext("com/spring/orm/config.xml");
         // StudentDao studentDao = context.getBean("studentDaoImpl", StudentDao.class);
@@ -41,5 +41,19 @@ public class App
         // st.setStudentCity("Bhopal");
 
         // studentDao.insert(st);
+
+        // System.out.println(stDaoObj.getStudentById(54).toString());
+        
+        // get all students
+        // System.out.println(stDaoObj.getStudents().toString());
+
+        // UPDATE
+
+        st.setStudentId(54);
+        st.setStudentName("Mahi Meena");
+        st.setStudentCity("Bhopal");
+
+        System.out.println(stDaoObj.updateStudent(st));
+
     }
 }
