@@ -1,5 +1,8 @@
 package com.spring.orm;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -49,11 +52,63 @@ public class App
 
         // UPDATE
 
-        st.setStudentId(54);
-        st.setStudentName("Mahi Meena");
-        st.setStudentCity("Bhopal");
+        // st.setStudentId(54);
+        // st.setStudentName("Mahi Meena");
+        // st.setStudentCity("Bhopal");
 
-        System.out.println(stDaoObj.updateStudent(st));
+        // System.out.println(stDaoObj.updateStudent(st));
+
+
+        System.out.println("******************* Welcome to spring orm projects ********************");
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        boolean runApplication = true;
+
+        while (runApplication) {
+            System.out.println("Press 1 for new student");
+            System.out.println("Press 2 for display all student");
+            System.out.println("Press 3 for get details of a single student");
+            System.out.println("Press 4 for delete student");
+            System.out.println("Press 5 for update student");
+            System.out.println("Press 6 for exit");
+
+            try {
+
+                int option = Integer.parseInt(br.readLine());
+
+                switch (option) {
+                    case 1:
+                        
+                        break;
+                
+                    case 2:
+                        
+                        break;
+                
+                    case 3:
+                        
+                        break;
+                
+                    case 4:
+                        
+                        break;
+                
+                    case 5:
+                        
+                        break;
+                
+                    case 6 :
+                        runApplication = false;
+                        System.out.println("Thank you for using HG CLI application!");
+                        break;
+                }
+                
+            } catch (Exception e) {
+               System.out.println("");
+               System.out.println(e.getMessage());
+            }
+        }
 
     }
 }
