@@ -54,6 +54,15 @@ public class HomeController {
         LocalDateTime now = LocalDateTime.now();
         modelAndView.addObject("time", now);
 
+        List<Integer> num = new ArrayList<>();
+
+        num.add(22);
+        num.add(67);
+        num.add(99);
+        num.add(86);
+
+        modelAndView.addObject("marks", num);
+
         return modelAndView;
     }
     
