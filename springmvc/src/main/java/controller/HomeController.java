@@ -1,11 +1,7 @@
 package controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-
 
 
 @Controller
@@ -16,4 +12,11 @@ public class HomeController {
         System.out.println("In home controller....");
         return "index";
     }
+
+    @RequestMapping("/about")
+    public String aboutController() {
+        System.out.println("In about controller....");
+        return "about";
+    }
+    
 }

@@ -4,7 +4,7 @@
     <title>Home</title>
 </head>
 <body>
-<h1>Hello world!</h1>
-<p>This is home page.</p>
+<h1>Index page</h1>
+<p>This is index page</p>
 </body>
 </html>
