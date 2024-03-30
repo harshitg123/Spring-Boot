@@ -1,9 +1,15 @@
 package controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.oracle.wls.shaded.org.apache.xpath.operations.Mod;
+
+import model.User;
 
 
 
@@ -15,9 +21,47 @@ public class ContactController {
         return "contact";
     }
 
+    // @RequestMapping(path = "/processForm", method=RequestMethod.POST)
+    // public String requestMethodName(
+    //     @RequestParam("email") String userEmail,
+    //     @RequestParam("username") String userName,
+    //     @RequestParam("password") String userPassword, Model model) {
+
+    //     System.out.println(userEmail);
+    //     System.out.println(userName);
+    //     System.out.println(userPassword);
+
+    //     model.addAttribute("email", userEmail);
+    //     model.addAttribute("password", userPassword);
+    //     model.addAttribute("name", userName);
+
+    //     return "success";
+    // }
+
+    // @RequestMapping(path = "/processForm", method=RequestMethod.POST)
+    // public String requestMethodName(
+    //     @RequestParam("email") String userEmail,
+    //     @RequestParam("username") String userName,
+    //     @RequestParam("password") String userPassword, Model model) {
+
+    //     User user = new User();
+
+    //     user.setEmail(userEmail);
+    //     user.setPassword(userPassword);
+    //     user.setUsername(userName);
+
+    //     System.out.println(user);
+
+    //     model.addAttribute("user", user);
+
+    //     return "success";
+    // }
+
+    // @ModelAttribute will map the form fields with the model variables
     @RequestMapping(path = "/processForm", method=RequestMethod.POST)
-    public void requestMethodName(@RequestParam String param) {
-     
+    public String requestMethodName(@ModelAttribute User user, Model model) {
+        System.out.println(user);
+        return "success";
     }
     
     
