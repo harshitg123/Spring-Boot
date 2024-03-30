@@ -15,6 +15,17 @@ import model.User;
 
 @Controller
 public class ContactController {
+
+    // We can specify redudent code in on mwthod with the help of ModelAttribute which will run each time we hit
+    // any endpoint and add the attribute in model
+
+    @ModelAttribute
+    public void commonData(Model model){
+        model.addAttribute("username", "Harshit Gupta");
+        model.addAttribute("appName", "Test application");
+        System.out.println("Adding common data to model......");
+    }
+
     
     @RequestMapping(path = "/contact", method=RequestMethod.GET)
     public String contactDetails() {

@@ -2,6 +2,7 @@
 <%@ page import ="java.util.ArrayList"%>
 <%@ page import ="java.util.List"%>
 <%@ page import ="java.time.LocalDateTime"%>
+<%@ page isELIgnored="false" %>
 
 <!doctype html>
 <html lang="en">
@@ -19,6 +20,7 @@
     
     <div class="container my-2">
         <h3>Registration form</h3>
+        <p>${appName}</p>
         <form action="processForm" method="post">
         <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
