@@ -1,6 +1,7 @@
 com/spring/mvc/controller/HomeController.class
 com/spring/mvc/dao/UserDao.class
 com/spring/mvc/controller/RedirectController.class
+com/spring/mvc/controller/SearchController.class
 com/spring/mvc/configuration/HibernateConfiguration.class
 com/spring/mvc/controller/ContactController.class
 com/spring/mvc/model/User.class

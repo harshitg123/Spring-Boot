@@ -74,6 +74,11 @@ public class ContactController {
     @RequestMapping(path = "/processForm", method=RequestMethod.POST)
     public String requestMethodName(@ModelAttribute User user, Model model) {
         System.out.println(user);
+
+        if (user.getUsername().isBlank()) {
+            return "redirect:/contact";
+        }
+
         Long id = this.userService.createUser(user);
         model.addAttribute("Id", id);
         return "success";
