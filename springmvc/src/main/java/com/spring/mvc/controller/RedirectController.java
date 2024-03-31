@@ -5,6 +5,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.web.bind.annotation.RequestParam;
+
+
 
 /**
  * RedirectController
@@ -24,9 +31,22 @@ public class RedirectController {
     @RequestMapping(path = "/redirect", method=RequestMethod.GET)
     public RedirectView redirect() {
         RedirectView redirectView = new RedirectView();
-        redirectView.setUrl("second");
+        redirectView.setUrl("second"); // or you can use external url as well "https://www.google.com"
         return redirectView;
     }
+
+    // Redirect using HttpServletResponse (not recommended way in spring mvc)
+    @RequestMapping(path = "/redirectViaHttp", method=RequestMethod.GET)
+    public String redirectUsingHttp(HttpServletResponse httpServletResponse) {
+        try {
+            httpServletResponse.sendRedirect("contact");
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return "";
+    }
+    
     
     
     @RequestMapping(path = "/second", method=RequestMethod.GET)
