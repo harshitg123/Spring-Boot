@@ -34,7 +34,7 @@ public class HibernateConfig {
     }
     
     @Bean
-    public LocalSessionFactoryBean getSessionFactory(){
+    public LocalSessionFactoryBean sessionFactory(){
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(getDataSource());
         sessionFactory.setHibernateProperties(getHibernateProperties());
@@ -46,7 +46,7 @@ public class HibernateConfig {
     @Bean
     public HibernateTransactionManager transactionManager() {
         HibernateTransactionManager transactionManager = new HibernateTransactionManager();
-        transactionManager.setSessionFactory(getSessionFactory().getObject());
+        transactionManager.setSessionFactory(sessionFactory().getObject());
         return transactionManager;
     }
 

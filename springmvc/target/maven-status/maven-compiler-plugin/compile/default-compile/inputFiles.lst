@@ -1,3 +1,6 @@
-/Users/harshit/Documents/Projects/spring/springmvc/src/main/java/controller/ContactController.java
-/Users/harshit/Documents/Projects/spring/springmvc/src/main/java/model/User.java
-/Users/harshit/Documents/Projects/spring/springmvc/src/main/java/controller/HomeController.java
+/Users/harshit/Documents/Projects/spring/springmvc/src/main/java/com/spring/mvc/configuration/HibernateConfiguration.java
+/Users/harshit/Documents/Projects/spring/springmvc/src/main/java/com/spring/mvc/model/User.java
+/Users/harshit/Documents/Projects/spring/springmvc/src/main/java/com/spring/mvc/dao/UserDao.java
+/Users/harshit/Documents/Projects/spring/springmvc/src/main/java/com/spring/mvc/controller/ContactController.java
+/Users/harshit/Documents/Projects/spring/springmvc/src/main/java/com/spring/mvc/service/UserService.java
+/Users/harshit/Documents/Projects/spring/springmvc/src/main/java/com/spring/mvc/controller/HomeController.java

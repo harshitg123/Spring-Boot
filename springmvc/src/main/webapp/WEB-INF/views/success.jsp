@@ -11,6 +11,7 @@
 
 <h1>My name is ${user.username }</h1>
 <h1>My email is ${user.email }</h1>
+<h1> Inserted record ${Id} </h1>
 
 
 </body>
