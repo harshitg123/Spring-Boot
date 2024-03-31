@@ -5,4 +5,6 @@ com/spring/mvc/controller/SearchController.class
 com/spring/mvc/configuration/HibernateConfiguration.class
 com/spring/mvc/controller/ContactController.class
 com/spring/mvc/model/User.class
+com/spring/mvc/model/ComplexForm.class
+com/spring/mvc/controller/ComplexFormController.class
 com/spring/mvc/service/UserService.class
