@@ -1,3 +1,6 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ page isELIgnored="false" %>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -12,6 +15,21 @@
   </head>
   <body>
     <div class="container mx-auto mt-5" style="width: 50%;">
+        <h1>Complex form</h1>
+
+        <%
+            String st = (String) request.getAttribute("errors");
+            if( st == "true"){
+        %>
+                
+            <div class="alert alert-danger" role="alert">
+                <form:errors path="complexForm.*" />
+            </div>
+
+        <%
+            }
+        %>
+
         <form action="submitComplexForm" method="post">
             <div class="form-group">
               <label for="exampleFormControlInput1">Email address</label>
@@ -52,13 +70,28 @@
               <div class="d-flex">
                 <div class="mr-4">Select gender</div>
                 <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="customRadioInline1" name="gender" class="custom-control-input">
+                    <input type="radio" id="customRadioInline1" name="gender" class="custom-control-input" value="Male">
                     <label class="custom-control-label" for="customRadioInline1">Male</label>
                   </div>
                   <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="customRadioInline2" name="gender" class="custom-control-input">
+                    <input type="radio" id="customRadioInline2" name="gender" class="custom-control-input" value="Female">
                     <label class="custom-control-label" for="customRadioInline2">Female</label>
                   </div>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleFormControlInput1">State</label>
+                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter your state" name="address.state">
+            </div>
+
+            <div class="form-group">
+            <label for="exampleFormControlInput1">City</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter your city" name="address.city">
+            </div>
+
+            <div class="form-group">
+            <label for="exampleFormControlInput1">Pin code</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter your pin code" name="address.pinCode">
             </div>
 
             <button type="submit" class="btn btn-primary mt-4">Submit</button>

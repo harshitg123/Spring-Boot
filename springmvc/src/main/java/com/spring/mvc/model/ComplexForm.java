@@ -10,6 +10,9 @@ public class ComplexForm {
     private List<String> courses;
     private String platform;
     private String gender;
+
+    private Address address;
+
     public Long getId() {
         return id;
     }
@@ -46,11 +49,18 @@ public class ComplexForm {
     public void setGender(String gender) {
         this.gender = gender;
     }
+    public Address getAddress() {
+        return address;
+    }
+    public void setAddress(Address address) {
+        this.address = address;
+    }
     @Override
     public String toString() {
         return "ComplexForm [id=" + id + ", email=" + email + ", date=" + date + ", courses=" + courses + ", platform="
-                + platform + ", gender=" + gender + "]";
+                + platform + ", gender=" + gender + ", address=" + address + "]";
     }
+    
 
     
 }

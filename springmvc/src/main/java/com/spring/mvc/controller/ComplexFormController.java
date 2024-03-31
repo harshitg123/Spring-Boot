@@ -1,6 +1,8 @@
 package com.spring.mvc.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,8 +20,14 @@ public class ComplexFormController {
     }
 
     @RequestMapping(path = "/submitComplexForm", method=RequestMethod.POST)
-    public String submitComplexForm(@ModelAttribute ComplexForm complexForm) {
+    public String submitComplexForm(@ModelAttribute("complexForm") ComplexForm complexForm, BindingResult bindingResult, Model model) {
         System.out.println(complexForm.toString());
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("errors", "true");
+            return "complexForm";
+        }
+
         return "complexFormSuccess";
     }
     
