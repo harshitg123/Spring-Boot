@@ -23,6 +23,13 @@
     <property name="suffix" value=".jsp" />
 </bean>
 
-<!-- <bean class="org.springframework.web.multipart.support.StandardServletMultipartResolver" name="multipartResolver" /> -->
+<mvc:interceptors>
+  <mvc:interceptor>
+    <mvc:mapping path="/interceptorSucces" />
+    <bean class="com.spring.mvc.controller.MyInterceptor" ></bean>
+  </mvc:interceptor>
+</mvc:interceptors>
+
+<bean class="org.springframework.web.multipart.support.StandardServletMultipartResolver" name="multipartResolver" />
 
 </beans>

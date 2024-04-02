@@ -1,4 +1,5 @@
 com/spring/mvc/controller/FileUploadController.class
+com/spring/mvc/controller/MyInterceptor.class
 com/spring/mvc/controller/ExceptionHandeller.class
 com/spring/mvc/controller/PathVariableController.class
 com/spring/mvc/configuration/HibernateConfiguration.class
@@ -10,5 +11,6 @@ com/spring/mvc/model/Address.class
 com/spring/mvc/controller/RedirectController.class
 com/spring/mvc/controller/SearchController.class
 com/spring/mvc/model/ComplexForm.class
+com/spring/mvc/controller/InterceptorController.class
 com/spring/mvc/controller/ComplexFormController.class
 com/spring/mvc/service/UserService.class
