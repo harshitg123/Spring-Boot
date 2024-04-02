@@ -8,6 +8,7 @@
 /Users/harshit/Documents/Projects/spring/springmvc/src/main/java/com/spring/mvc/configuration/HibernateConfiguration.java
 /Users/harshit/Documents/Projects/spring/springmvc/src/main/java/com/spring/mvc/model/ComplexForm.java
 /Users/harshit/Documents/Projects/spring/springmvc/src/main/java/com/spring/mvc/controller/FileUploadController.java
+/Users/harshit/Documents/Projects/spring/springmvc/src/main/java/com/spring/mvc/controller/ExceptionHandeller.java
 /Users/harshit/Documents/Projects/spring/springmvc/src/main/java/com/spring/mvc/controller/RedirectController.java
 /Users/harshit/Documents/Projects/spring/springmvc/src/main/java/com/spring/mvc/controller/ContactController.java
 /Users/harshit/Documents/Projects/spring/springmvc/src/main/java/com/spring/mvc/controller/PathVariableController.java

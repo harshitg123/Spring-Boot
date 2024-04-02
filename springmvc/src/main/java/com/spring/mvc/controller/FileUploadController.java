@@ -19,6 +19,10 @@ public class FileUploadController {
     
     @RequestMapping(path = "/uploadFile", method=RequestMethod.GET)
     public String showFileForm() {
+
+        String st = null;
+        System.out.println(st.length());
+
         return "uploadFileForm";
     }
 

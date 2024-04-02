@@ -1,4 +1,5 @@
 com/spring/mvc/controller/FileUploadController.class
+com/spring/mvc/controller/ExceptionHandeller.class
 com/spring/mvc/controller/PathVariableController.class
 com/spring/mvc/configuration/HibernateConfiguration.class
 com/spring/mvc/controller/ContactController.class
