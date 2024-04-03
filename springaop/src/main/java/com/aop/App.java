@@ -20,9 +20,9 @@ public class App
         PaymentServiceDao paymentServiceDao = context.getBean("paymentServiceDaoImpl", PaymentServiceDao.class);
         
         // run some other bussiness logic before deductMoney() without modifing
-        paymentServiceDao.deductMoney(334);
+        paymentServiceDao.deductMoney(334); // join point 1
 
         // run some other bussiness logic after addMoney() without modifing
-        paymentServiceDao.addMoney(334);
+        paymentServiceDao.addMoney(334); // join point 2
     }
 }
