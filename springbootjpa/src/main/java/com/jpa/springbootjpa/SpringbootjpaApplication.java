@@ -84,12 +84,24 @@ public class SpringbootjpaApplication {
 
 		// Delete multiple users
 
-		Iterable<User> allusers = userRepository.findAll();
-		allusers.forEach(user -> {
+		// Iterable<User> allusers = userRepository.findAll();
+		// allusers.forEach(user -> {
+		// System.out.println(user);
+		// });
+		// userRepository.deleteAll(allusers);
+		// System.out.println("All users deleted");
+
+		// Custom finder methods
+
+		// List<User> users = userRepository.findByCountry("india");
+		// users.forEach(user -> {
+		// System.out.println(user);
+		// });
+
+		List<User> users = userRepository.findByNameAndCity("ayush joshi", "bhopal");
+		users.forEach(user -> {
 			System.out.println(user);
 		});
-		userRepository.deleteAll(allusers);
-		System.out.println("All users deleted");
 
 	}
 
