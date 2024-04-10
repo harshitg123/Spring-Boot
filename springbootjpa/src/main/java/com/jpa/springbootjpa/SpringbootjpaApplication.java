@@ -98,10 +98,16 @@ public class SpringbootjpaApplication {
 		// System.out.println(user);
 		// });
 
-		List<User> users = userRepository.findByNameAndCity("ayush joshi", "bhopal");
-		users.forEach(user -> {
-			System.out.println(user);
-		});
+		// List<User> users = userRepository.findByNameAndCity("ayush joshi", "bhopal");
+		// users.forEach(user -> {
+		// System.out.println(user);
+		// });
+
+		// Get all users using custom query
+
+		System.out.println(userRepository.getAllUsers());
+		System.out.println(userRepository.getUsersByName("ayush joshi"));
+		System.out.println(userRepository.getUserById(55l));
 
 	}
 
