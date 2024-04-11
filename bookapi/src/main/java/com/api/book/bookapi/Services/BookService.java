@@ -1,6 +1,8 @@
 package com.api.book.bookapi.Services;
 
 import java.util.*;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
@@ -28,5 +30,9 @@ public class BookService {
     public Book saveBook(Book book) {
         books.add(book);
         return book;
+    }
+
+    public void deleteBook(int id) {
+        books = books.stream().filter(e -> e.getId() != id).collect(Collectors.toList());
     }
 }
