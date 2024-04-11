@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.api.book.bookapi.Entites.Book;
 import com.api.book.bookapi.Services.BookService;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 public class BookController {
@@ -26,6 +28,11 @@ public class BookController {
     @GetMapping("/book/{id}")
     public Book getBookById(@PathVariable int id) {
         return bookService.getBookById(id);
+    }
+
+    @PostMapping("/book")
+    public Book saveBook(@RequestBody Book book) {
+        return bookService.saveBook(book);
     }
 
 }
