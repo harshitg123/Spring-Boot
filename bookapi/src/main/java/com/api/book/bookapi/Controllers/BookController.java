@@ -47,7 +47,7 @@ public class BookController {
         Book responseBook = null;
         try {
             responseBook = bookService.saveBook(book);
-            return ResponseEntity.of(Optional.of(responseBook));
+            return ResponseEntity.status(HttpStatus.CREATED).body(responseBook);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
