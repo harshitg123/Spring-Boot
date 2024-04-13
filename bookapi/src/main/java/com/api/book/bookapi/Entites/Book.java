@@ -21,6 +21,7 @@ public class Book {
     private int id;
     private String name;
 
+    // Uni directional data will flow from book to author
     @OneToOne(cascade = CascadeType.ALL)
     private Author author;
 
