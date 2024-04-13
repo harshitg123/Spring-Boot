@@ -1,5 +1,7 @@
 package com.api.book.bookapi.Entites;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,6 +18,7 @@ public class Book {
     @Column(name = "book_id")
     private int id;
     private String name;
+
     private String author;
 
     public int getId() {
@@ -34,6 +37,7 @@ public class Book {
         this.name = name;
     }
 
+    @JsonIgnore
     public String getAuthor() {
         return author;
     }
