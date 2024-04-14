@@ -2,6 +2,7 @@ package com.api.book.bookapi.Controllers;
 
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.api.book.bookapi.Helper.FileUploadHelper;
 
@@ -30,7 +31,8 @@ public class FileUploaderController {
             // save file
 
             if (fileUploadHelper.uploadFile(file)) {
-                return ResponseEntity.ok().body("Successfull");
+                return ResponseEntity.ok(ServletUriComponentsBuilder.fromCurrentContextPath().path("/images/")
+                        .path(file.getOriginalFilename()).toUriString());
             } else {
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
             }
