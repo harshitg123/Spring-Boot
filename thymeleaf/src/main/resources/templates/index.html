@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>My name is <span th:text="${name}"></span>  </h1>
+    <h1 th:text="${ #strings.toUpperCase(name) }"></h1>
+
+    <!-- Variables scope will be in div only -->
+    <div th:with="a=25, b=50, n=${name}">
+
+        <h1>value of a is <span th:text="${a}"></span></h1>
+        <h1>value of b is <span th:text="${a}"></span></h1>
+        <h1>sum of a and b is <span th:text="${a + b}"></span></h1>
+        <h1 th:text="'Local variable from controller is ' + ${name}"></h1>
+
+    </div>
+</body>
+</html>
