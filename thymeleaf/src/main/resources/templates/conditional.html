@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Learn conditional statement in thymeleaf</h1>
+
+    <h1>Elvis operator</h1>
+    <h1>condition is <span th:style="${isActive} ? 'color:green' : 'color:red' " th:text="${isActive} ? 'Active' : 'Deactivate' "></span></h1>
+    
+    <h1>If unless operator</h1>
+    <h2 th:if="${gender}=='M'">Male</h2>
+    <h2 th:unless="${gender}=='M'">Female</h2>
+
+    <h1>Switch operator</h1>
+    <div th:switch="${#lists.size(friends)}">
+        <div th:case="0"> My len is 0</div>
+        <div th:case="1"> My len is 1</div>
+        <div th:case="*"> I'M  Default case</div>
+    </div>
+</body>
+</html>
