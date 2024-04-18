@@ -30,4 +30,9 @@ public class IteratorConroller {
         return "conditional";
     }
 
+    @GetMapping("/template")
+    public String getTemplate() {
+        return "templatePage";
+    }
+
 }

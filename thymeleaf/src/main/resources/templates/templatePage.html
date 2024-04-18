@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div>Template</div>
+
+    <h2>Replace</h2>
+    <footer th:replace="fragement::footer1" class="host"></footer>
+
+
+    <h2>Insert</h2>
+    <footer th:insert="fragement::footer1" class="host"></footer>
+
+
+    <h3>Include</h3>
+    <footer th:include="fragement::footer1"></footer>
+</body>
+</html>
