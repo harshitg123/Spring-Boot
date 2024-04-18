@@ -10,14 +10,14 @@
     <div>Template</div>
 
     <h2>Replace</h2>
-    <footer th:replace="fragement::footer1" class="host"></footer>
+    <footer th:replace="fragement::footer1(${title}, ${subtitle})" class="host"></footer>
 
 
     <h2>Insert</h2>
-    <footer th:insert="fragement::footer1" class="host"></footer>
+    <footer th:insert="fragement::footer1(${title}, ${subtitle})" class="host"></footer>
 
 
     <h3>Include</h3>
-    <footer th:include="fragement::footer1"></footer>
+    <footer th:include="fragement::footer1(${title}, ${subtitle})"></footer>
 </body>
 </html>

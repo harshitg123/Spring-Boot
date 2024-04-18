@@ -31,7 +31,9 @@ public class IteratorConroller {
     }
 
     @GetMapping("/template")
-    public String getTemplate() {
+    public String getTemplate(Model model) {
+        model.addAttribute("title", "This is title");
+        model.addAttribute("subtitle", "This is subtitle");
         return "templatePage";
     }
 

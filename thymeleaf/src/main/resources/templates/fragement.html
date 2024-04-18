@@ -7,10 +7,10 @@
 </head>
 <body>
 
-    <footer th:fragment="footer1" class="fragement">
-        <h1>This is fragement</h1>
+    <footer th:fragment="footer1(title, subtitle)" class="fragement">
+        <h1 th:text="${title}"></h1>
+        <h3 th:text="${subtitle}"></h3>
         <div>We can replace this fragemt using 3 ways</div>
-        <h3>Replace, Insert, include</h3>
     </footer>
     
 </body>
