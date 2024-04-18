@@ -37,4 +37,16 @@ public class IteratorConroller {
         return "templatePage";
     }
 
+    @GetMapping("/about")
+    public String getAboutPage(Model model) {
+        model.addAttribute("title", "About me");
+        return "about";
+    }
+
+    @GetMapping("/contact")
+    public String getContactPage(Model model) {
+        model.addAttribute("title", "Contact me");
+        return "contact";
+    }
+
 }
