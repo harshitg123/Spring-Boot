@@ -10,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "USER")
@@ -20,10 +21,14 @@ public class User {
     @Column(name = "user_id")
     private Long id;
     @Column(unique = true)
+    @NotEmpty(message = "Email can not be null")
     private String email;
+    @NotEmpty(message = "Name can not be null")
     private String name;
+    @NotEmpty(message = "Password can not be null")
     private String password;
     @Column(length = 500)
+    @NotEmpty(message = "Please write about yourself")
     private String about;
     private String role;
     private boolean isActive;

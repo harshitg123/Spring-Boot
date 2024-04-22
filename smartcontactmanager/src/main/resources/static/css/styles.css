@@ -1,0 +1,21 @@
+body {
+  background-color: #e2e2e2;
+}
+
+.bg-primary {
+  background-color: #009688 !important;
+}
+
+.banner {
+  width: 100%;
+  height: 93vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url(../img/home-page-banner-person.jpeg);
+  color: #fff;
+  background-size: cover;
+}
+
+.my-card {
+  background-color: #fff;
+  padding: 20px;
+}
