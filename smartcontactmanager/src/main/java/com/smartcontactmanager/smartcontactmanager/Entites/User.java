@@ -10,7 +10,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "USER")
@@ -20,15 +21,19 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "user_id")
     private Long id;
+
     @Column(unique = true)
-    @NotEmpty(message = "Email can not be null")
+    @NotBlank(message = "Email can not be null")
     private String email;
-    @NotEmpty(message = "Name can not be null")
+
+    @NotBlank(message = "Name can not be null")
+    @Size(min = 2, max = 20, message = "min 2 and max 20 characters are allowed")
     private String name;
-    @NotEmpty(message = "Password can not be null")
+
+    @NotBlank(message = "Password can not be null")
     private String password;
+
     @Column(length = 500)
-    @NotEmpty(message = "Please write about yourself")
     private String about;
     private String role;
     private boolean isActive;

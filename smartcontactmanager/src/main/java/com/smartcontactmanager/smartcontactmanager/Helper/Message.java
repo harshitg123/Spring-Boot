@@ -32,4 +32,9 @@ public class Message {
         this.type = type;
     }
 
+    @Override
+    public String toString() {
+        return "Message [content=" + content + ", type=" + type + "]";
+    }
+
 }

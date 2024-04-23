@@ -12,7 +12,6 @@ import com.smartcontactmanager.smartcontactmanager.Dao.UserRepository;
 import com.smartcontactmanager.smartcontactmanager.Entites.User;
 import com.smartcontactmanager.smartcontactmanager.Helper.Message;
 
-import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.PostMapping;
@@ -45,36 +44,42 @@ public class HomeController {
 
     @PostMapping("/registerUser")
     public String registerUser(
-            @Valid @ModelAttribute("user") User user,
-            @RequestParam(value = "tnc", defaultValue = "false") Boolean tnc,
-            Model model,
-            BindingResult bindingResult,
-            HttpSession session) {
+            @Valid @ModelAttribute("user") User user, BindingResult result,
+            @RequestParam(value = "tnc", defaultValue = "false") boolean tnc,
+            Model model) {
 
         try {
-            // System.out.println(bindingResult);
+
             System.out.println(user);
+            System.out.println(tnc);
 
             if (!tnc) {
                 System.out.println("You are not aggred to terms and conditions.");
                 throw new Exception("You are not aggred to terms and conditions.");
             }
 
+            if (result.hasErrors()) {
+                System.out.println(result.toString());
+                model.addAttribute("user", user);
+                return "signup";
+            }
+
             user.setRole("ROLE_USER");
             user.setActive(true);
 
-            User result = userRepository.save(user);
+            userRepository.save(user);
 
+            Message errorMessage = new Message("Successfully registered", "alert-success");
+            model.addAttribute("message", errorMessage);
             model.addAttribute("user", new User());
-
-            session.setAttribute("message", new Message("Successfully registered", "alert-success"));
-
             return "signup";
 
         } catch (Exception e) {
             e.printStackTrace();
+
+            Message errorMessage = new Message("Something went wrong", "alert-danger");
+            model.addAttribute("message", errorMessage);
             model.addAttribute("user", user);
-            session.setAttribute("message", new Message("Something went wrong!!", "alert-error"));
             return "signup";
         }
 
