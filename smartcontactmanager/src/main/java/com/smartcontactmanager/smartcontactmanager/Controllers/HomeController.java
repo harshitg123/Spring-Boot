@@ -1,6 +1,7 @@
 package com.smartcontactmanager.smartcontactmanager.Controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,6 +20,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class HomeController {
+
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
     private UserRepository userRepository;
@@ -66,6 +70,7 @@ public class HomeController {
 
             user.setRole("ROLE_USER");
             user.setActive(true);
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
 
             userRepository.save(user);
 
