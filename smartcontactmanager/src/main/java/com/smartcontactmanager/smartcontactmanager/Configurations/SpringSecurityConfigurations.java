@@ -41,7 +41,11 @@ public class SpringSecurityConfigurations {
                         .requestMatchers("/user/**").hasRole("USER")
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().permitAll())
-                .formLogin(form -> form.loginPage("/signin"))
+                .formLogin(form -> form
+                        .loginPage("/signin")
+                        .loginProcessingUrl("/signin")
+                        .defaultSuccessUrl("/user/dashboard")
+                        .failureForwardUrl("/login-fail"))
                 .csrf(AbstractHttpConfigurer::disable);
 
         return http.build();
