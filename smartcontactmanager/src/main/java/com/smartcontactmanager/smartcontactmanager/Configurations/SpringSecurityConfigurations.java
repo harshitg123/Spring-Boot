@@ -1,7 +1,5 @@
 package com.smartcontactmanager.smartcontactmanager.Configurations;
 
-import static org.springframework.security.config.Customizer.withDefaults;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -43,10 +41,8 @@ public class SpringSecurityConfigurations {
                         .requestMatchers("/user/**").hasRole("USER")
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().permitAll())
-                .httpBasic(withDefaults())
-                .formLogin(withDefaults())
+                .formLogin(form -> form.loginPage("/signin"))
                 .csrf(AbstractHttpConfigurer::disable);
-        // .csrf(csrf -> csrf.disable());
 
         return http.build();
     }

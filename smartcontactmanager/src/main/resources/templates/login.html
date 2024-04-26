@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::section})}">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                    <div class="my-card mt-4">
+                        <h1 class="text-center">Login here</h1>
+
+                        <div th:if="${param.error}" class="alert alert-danger" role="alert">
+                            Invalid username or password.
+                        </div>
+
+                        <div th:if="${param.logout}" class="alert alert-success" role="alert">
+                            You have been logged out.
+                        </div>
+
+                        <form novalidate th:action="@{/signin}" method="post" th:object="${user}">
+
+                            <!-- email -->
+
+                            <div class="mb-3">
+                                <label for="email_field" class="form-label">Your email</label>
+                                <input type="email" class="form-control"
+                                    th:classappend="${#fields.hasErrors('email') ? 'is-invalid' : ''}" id="email_field"
+                                    placeholder="Enter your email" name="username" th:value="${user.email}" />
+
+                                <div id="validationServer03Feedback" class="invalid-feedback"
+                                    th:each="e : ${#fields.errors('email')}" th:text="${e}">
+                                </div>
+                            </div>
+
+                            <!-- password -->
+                            <div class="mb-3">
+                                <label for="password_field" class="form-label">Password</label>
+                                <input type="password" class="form-control"
+                                    th:classappend="${#fields.hasErrors('password') ? 'is-invalid' : ''}"
+                                    id="password_field" placeholder="Enter password" name="password" />
+
+                                <div id="validationServer03Feedback" class="invalid-feedback"
+                                    th:each="e : ${#fields.errors('password')}" th:text="${e}">
+                                </div>
+                            </div>
+
+                            <div class="container text-center">
+                                <button type="submit" class="btn bg-primary text-light">Submit</button>
+                                <button type="reset" class="btn btn-outline-danger">Reset</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>
