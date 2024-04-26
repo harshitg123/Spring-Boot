@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -42,27 +43,18 @@ public class SpringSecurityConfigurations {
     }
 
     @Bean
-    public SecurityFilterChain adminRole(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity
-                .securityMatcher("/user/**")
-                .authorizeHttpRequests(
-                        request -> request.anyRequest().hasRole("ADMIN")
+    public SecurityFilterChain userRole(HttpSecurity http) throws Exception {
+        http
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/user/**").hasRole("USER")
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .anyRequest().permitAll())
+                .httpBasic(withDefaults())
+                .formLogin(withDefaults())
+                .csrf(AbstractHttpConfigurer::disable);
+        // .csrf(csrf -> csrf.disable());
 
-                )
-                .httpBasic(withDefaults());
-        return httpSecurity.build();
-
-    }
-
-    @Bean
-    public SecurityFilterChain userRole(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity
-                .securityMatcher("/signup")
-                .authorizeHttpRequests(
-                        request -> request.anyRequest().hasRole("USER"))
-                .httpBasic(withDefaults());
-        return httpSecurity.build();
-
+        return http.build();
     }
 
 }
