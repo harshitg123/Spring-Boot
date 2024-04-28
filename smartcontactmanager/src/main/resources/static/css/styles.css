@@ -19,3 +19,47 @@ body {
   background-color: #fff;
   padding: 20px;
 }
+
+.close-btn {
+  padding: 10px 15px 0;
+  text-align: end;
+  font-size: 20px;
+  color: gray;
+}
+
+.close-btn .close {
+  cursor: pointer;
+}
+
+.side-bar {
+  width: 18%;
+  height: 100%;
+  position: fixed;
+  background-color: #fff;
+}
+
+.side-bar a {
+  display: block;
+  padding: 15px;
+  text-decoration: none;
+  color: gray;
+}
+
+.side-bar a:hover {
+  background-color: #e2e2e2;
+}
+
+.content {
+  margin-left: 20%;
+}
+
+@media only screen and (max-width: 600px) {
+  .side-bar {
+    display: none;
+    width: 60%;
+  }
+
+  .content {
+    margin-left: 0;
+  }
+}

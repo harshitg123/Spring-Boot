@@ -23,10 +23,7 @@ public class UserController {
     public String userDashboard(Model model, Principal principal) {
 
         String username = principal.getName();
-        System.out.println("Username " + username);
-
         User user = userRepository.findByEmail(username);
-        System.out.println(user);
 
         model.addAttribute("user", user);
 
