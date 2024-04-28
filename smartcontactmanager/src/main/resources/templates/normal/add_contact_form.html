@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{normal/base::layout(~{::section})}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <section>
+        <div class="closeHam">
+            <i onclick="toggleButton()" class="fa-solid fa-bars close"></i>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <div class="my-card mt-4">
+                        <h1 class="text-center mb-3">Add new contact</h1>
+
+                        <div th:if="${message}" th:classappend="${message.type}" th:text="${message.content}"
+                            class="alert" role="alert">
+                        </div>
+
+                        <form novalidate th:action="@{/addContact}" method="post" th:object="${contact}">
+                            <!-- name -->
+
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="name_field"> <i class="fa-solid fa-user"></i> </span>
+                                <input type="text" class="form-control" placeholder="Enter your name" aria-label="name"
+                                    aria-describedby="name_field" th:value="${contact.name}">
+                            </div>
+
+                            <!-- second name -->
+
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="second_name_field"> <i
+                                        class="fa-solid fa-user-shield"></i> </span>
+                                <input type="text" class="form-control" placeholder="Enter nick name"
+                                    aria-label="nick name" aria-describedby="second_name_field"
+                                    th:value="${contact.secondName}">
+                            </div>
+
+                            <!-- Phone number -->
+
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="phone_num_field"> <i class="fa-solid fa-phone"></i>
+                                </span>
+                                <input type="text" class="form-control" placeholder="Enter phone number"
+                                    aria-label="phone number" aria-describedby="phone_num_field"
+                                    th:value="${contact.phone}">
+                            </div>
+
+
+                            <!-- email -->
+
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="email_field"> <i class="fa-solid fa-envelope"></i>
+                                </span>
+                                <input type="email" class="form-control" placeholder="Enter your email" name="email"
+                                    aria-label="email" aria-describedby="email_field" th:value="${contact.email}">
+                            </div>
+
+                            <!-- Work details -->
+
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="work_field"> <i class="fa-solid fa-briefcase"></i>
+                                </span>
+                                <input type="text" class="form-control" placeholder="Enter work details"
+                                    aria-label="work details" aria-describedby="work_field" th:value="${contact.work}">
+                            </div>
+
+                            <!-- upload image -->
+                            <div class="mb-3">
+                                <input class="form-control" type="file" id="formFile">
+                            </div>
+
+                            <!-- about -->
+                            <div class="form-floating mb-3">
+                                <textarea class="form-control" placeholder="" id="contact_description_field"
+                                    style="height: 100px" th:text="${contact.description}"></textarea>
+                                <label for="contact_description_field">Enter contact description</label>
+                            </div>
+
+                            <div class="container text-center">
+                                <button type="submit" class="btn bg-primary text-light">Submit</button>
+                                <button type="reset" class="btn btn-outline-danger">Reset</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>

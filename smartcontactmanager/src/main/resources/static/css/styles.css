@@ -31,11 +31,21 @@ body {
   cursor: pointer;
 }
 
+.close {
+  cursor: pointer;
+}
+
+.closeHam {
+  visibility: hidden;
+  position: fixed;
+}
+
 .side-bar {
   width: 18%;
   height: 100%;
   position: fixed;
   background-color: #fff;
+  margin-top: -1em;
 }
 
 .side-bar a {
@@ -51,6 +61,7 @@ body {
 
 .content {
   margin-left: 20%;
+  margin-top: 4em;
 }
 
 @media only screen and (max-width: 600px) {
