@@ -20,18 +20,29 @@
                     <div class="my-card mt-4">
                         <h1 class="text-center mb-3">Add new contact</h1>
 
-                        <div th:if="${message}" th:classappend="${message.type}" th:text="${message.content}"
-                            class="alert" role="alert">
+                        <div class="contact-form-alert">
+                            <div th:if="${message}" th:classappend="${message.type}"
+                                class="alert d-flex justify-content-between" role="alert">
+                                <span th:text="${message.content}"></span>
+                                <span><i class="fa-solid fa-xmark close" onclick="closeAlert()"></i></span>
+                            </div>
                         </div>
 
-                        <form novalidate th:action="@{/addContact}" method="post" th:object="${contact}">
+                        <form novalidate th:action="@{/user/addContact}" method="post" th:object="${contact}"
+                            enctype="multipart/form-data">
                             <!-- name -->
 
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="name_field"> <i class="fa-solid fa-user"></i> </span>
-                                <input type="text" class="form-control" placeholder="Enter your name" aria-label="name"
-                                    aria-describedby="name_field" th:value="${contact.name}">
+                                <input type="text" class="form-control" placeholder="Enter your name"
+                                    aria-describedby="name_field" th:value="${contact.name}" name="name"
+                                    th:classappend="${#fields.hasErrors('name') ? 'is-invalid' : ''}">
+
+                                <div id="validationServer03Feedback" class="invalid-feedback"
+                                    th:each="e : ${#fields.errors('name')}" th:text="${e}">
+                                </div>
                             </div>
+
 
                             <!-- second name -->
 
@@ -40,7 +51,7 @@
                                         class="fa-solid fa-user-shield"></i> </span>
                                 <input type="text" class="form-control" placeholder="Enter nick name"
                                     aria-label="nick name" aria-describedby="second_name_field"
-                                    th:value="${contact.secondName}">
+                                    th:value="${contact.secondName}" name="secondName">
                             </div>
 
                             <!-- Phone number -->
@@ -50,7 +61,12 @@
                                 </span>
                                 <input type="text" class="form-control" placeholder="Enter phone number"
                                     aria-label="phone number" aria-describedby="phone_num_field"
-                                    th:value="${contact.phone}">
+                                    th:value="${contact.phone}" name="phone"
+                                    th:classappend="${#fields.hasErrors('phone') ? 'is-invalid' : ''}">
+
+                                <div id="validationServer03Feedback" class="invalid-feedback"
+                                    th:each="e : ${#fields.errors('phone')}" th:text="${e}">
+                                </div>
                             </div>
 
 
@@ -69,19 +85,20 @@
                                 <span class="input-group-text" id="work_field"> <i class="fa-solid fa-briefcase"></i>
                                 </span>
                                 <input type="text" class="form-control" placeholder="Enter work details"
-                                    aria-label="work details" aria-describedby="work_field" th:value="${contact.work}">
+                                    aria-label="work details" aria-describedby="work_field" th:value="${contact.work}"
+                                    name="work">
                             </div>
 
                             <!-- upload image -->
                             <div class="mb-3">
-                                <input class="form-control" type="file" id="formFile">
+                                <input class="form-control" type="file" id="formFile" name="profileImage">
                             </div>
 
                             <!-- about -->
                             <div class="form-floating mb-3">
-                                <textarea class="form-control" placeholder="" id="contact_description_field"
-                                    style="height: 100px" th:text="${contact.description}"></textarea>
-                                <label for="contact_description_field">Enter contact description</label>
+                                <textarea class="form-control" placeholder="" id="mytextarea" style="height: 100px"
+                                    th:text="${contact.description}" name="description"></textarea>
+                                <label for="mytextarea">Enter contact description</label>
                             </div>
 
                             <div class="container text-center">
@@ -94,6 +111,13 @@
                 </div>
             </div>
         </div>
+        <script src="https://cdn.tiny.cloud/1/p43jetttix5kbmowxgl220tarqr3t5huj5sad0az3iokigqx/tinymce/7/tinymce.min.js"
+            referrerpolicy="origin"></script>
+        <script>
+            tinymce.init({
+                selector: '#mytextarea'
+            });
+        </script>
     </section>
 
 </body>

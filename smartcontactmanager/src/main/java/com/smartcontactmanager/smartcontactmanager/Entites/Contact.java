@@ -7,6 +7,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "CONTACT")
@@ -15,10 +17,12 @@ public class Contact {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long cId;
+    @Size(min = 3, max = 14, message = "Enter minimum 3 and maximum 14 characters")
     private String name;
     private String secondName;
     private String work;
     private String email;
+    @Size(min = 10, max = 10, message = "Enter 10 digit phone number")
     private String phone;
     private String imageUrl;
     @Column(length = 1000)
@@ -97,6 +101,13 @@ public class Contact {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "Contact [cId=" + cId + ", name=" + name + ", secondName=" + secondName + ", work=" + work + ", email="
+                + email + ", phone=" + phone + ", imageUrl=" + imageUrl + ", description=" + description + ", user="
+                + user + "]";
     }
 
 }
