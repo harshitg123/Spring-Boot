@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{normal/base::layout(~{::section})}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <section>
+        <div class="closeHam">
+            <i onclick="toggleButton()" class="fa-solid fa-bars close"></i>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 offset-md-1">
+                    <div class="my-card mt-4">
+                        <h1 class="text-center mb-5">Your contacts</h1>
+
+
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Id</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Phone</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <tr th:each="c : ${contacts}">
+                                    <th scope="row" th:text=" 'SCM' + ${c.cId}"></th>
+                                    <td th:text="${c.name} + ' (' + ${c.secondName} + ')'"></td>
+                                    <td th:text="${c.email}"></td>
+                                    <td th:text="${c.phone}"></td>
+                                    <td>action</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>

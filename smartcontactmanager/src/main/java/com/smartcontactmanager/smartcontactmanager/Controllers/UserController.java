@@ -18,6 +18,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.smartcontactmanager.smartcontactmanager.Constants;
+import com.smartcontactmanager.smartcontactmanager.Dao.ContactRepository;
 import com.smartcontactmanager.smartcontactmanager.Dao.UserRepository;
 import com.smartcontactmanager.smartcontactmanager.Entites.Contact;
 import com.smartcontactmanager.smartcontactmanager.Entites.User;
@@ -38,6 +39,9 @@ public class UserController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private ContactRepository contactRepository;
 
     @ModelAttribute
     public void commonData(Model model, Principal principal) {
@@ -117,6 +121,20 @@ public class UserController {
             return "normal/add_contact_form";
         }
 
+    }
+
+    @GetMapping("/showContacts")
+    public String getAllContacts(Model model, Principal principal) {
+        model.addAttribute("title", "Show user contacts");
+        User user = userRepository.findByEmail(principal.getName());
+
+        // List<Contact> contacts =
+        // contactRepository.findContactsByUserId(user.getId());
+        List<Contact> contacts = contactRepository.findByUser(user);
+        model.addAttribute("contacts", contacts);
+        System.out.println(contacts);
+
+        return "normal/show_contacts";
     }
 
 }
