@@ -6,6 +6,10 @@ body {
   background-color: #009688 !important;
 }
 
+.text-color {
+  color: #009688;
+}
+
 .banner {
   width: 100%;
   height: 93vh;
@@ -62,6 +66,13 @@ body {
 .content {
   margin-left: 20%;
   margin-top: 4em;
+}
+
+.profile-picture {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 @media only screen and (max-width: 600px) {

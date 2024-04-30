@@ -18,10 +18,10 @@
             <div class="row">
                 <div class="col-md-10 offset-md-1">
                     <div class="my-card mt-4">
-                        <h1 class="text-center mb-5">Your contacts</h1>
+                        <h1 class="text-center mb-4">Your contacts</h1>
 
 
-                        <table class="table">
+                        <table class="table" th:if="${isContactAvailable == 'Yes'}">
                             <thead>
                                 <tr>
                                     <th scope="col">Id</th>
@@ -34,15 +34,40 @@
                             <tbody>
 
                                 <tr th:each="c : ${contacts}">
-                                    <th scope="row" th:text=" 'SCM' + ${c.cId}"></th>
-                                    <td th:text="${c.name} + ' (' + ${c.secondName} + ')'"></td>
-                                    <td th:text="${c.email}"></td>
-                                    <td th:text="${c.phone}"></td>
-                                    <td>action</td>
+                                    <th scope="row" class="align-middle" th:text=" 'SCM' + ${c.cId}"></th>
+                                    <td class="align-middle">
+                                        <img class="img-fluid me-2 profile-picture" th:src="@{'/img/' + ${c.imageUrl}}"
+                                            alt="profileImage">
+                                        <span th:text="${c.name} + ' (' + ${c.secondName} + ')'"></span>
+                                    </td>
+                                    <td class="align-middle">
+                                        <a th:href="@{'/user/'+${c.cId}+'/contact'}"> <span th:text="${c.email}"></span>
+                                        </a>
+                                    </td>
+                                    <td class="align-middle" th:text="${c.phone}"></td>
+                                    <td class="align-middle">action</td>
                                 </tr>
 
                             </tbody>
                         </table>
+
+                        <nav class="pagination-tabbs" aria-label="Page navigation"
+                            th:if="${isContactAvailable == 'Yes'}">
+                            <ul class="pagination">
+                                <li class="page-item" th:classappend="${page <= 0 ? 'disabled' : ''}">
+                                    <a class="page-link text-color"
+                                        th:href="@{/user/showContacts/}+${currentPage - 1}">Previous</a>
+                                </li>
+                                <li th:each="i : ${#numbers.sequence(1, totalPages)}" class="page-item text-color"
+                                    th:classappend="${page == i-1 ? 'active' : ''}">
+                                    <a class="page-link" th:href="@{/user/showContacts/}+${i-1}" th:text="${i}"></a>
+                                </li>
+                                <li class="page-item" th:classappend="${page >= totalPages-1 ? 'disabled' : ''}">
+                                    <a class="page-link text-color"
+                                        th:href="@{/user/showContacts/}+${currentPage + 1}">Next</a>
+                                </li>
+                            </ul>
+                        </nav>
 
 
                     </div>

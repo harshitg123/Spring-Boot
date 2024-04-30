@@ -9,9 +9,13 @@ import java.security.Principal;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -28,6 +32,7 @@ import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -80,6 +85,7 @@ public class UserController {
 
             if (file.isEmpty()) {
                 System.out.println("Empty file!");
+                contact.setImageUrl("default.png");
             } else {
 
                 if (ALLOWED_IMAGE_TYPES.contains(file.getContentType())) {
@@ -123,18 +129,39 @@ public class UserController {
 
     }
 
-    @GetMapping("/showContacts")
-    public String getAllContacts(Model model, Principal principal) {
+    @GetMapping("/showContacts/{page}")
+    public String getAllContacts(@PathVariable("page") int page, Model model, Principal principal) {
         model.addAttribute("title", "Show user contacts");
         User user = userRepository.findByEmail(principal.getName());
 
-        // List<Contact> contacts =
-        // contactRepository.findContactsByUserId(user.getId());
-        List<Contact> contacts = contactRepository.findByUser(user);
-        model.addAttribute("contacts", contacts);
-        System.out.println(contacts);
+        // pagable is an interface so we will use its implementation class to set page
+        // and records
+        Pageable pageable = PageRequest.of(page, 10);
+
+        Page<Contact> contacts = contactRepository.findByUser(user, pageable);
+
+        if (!contacts.isEmpty()) {
+            model.addAttribute("contacts", contacts);
+            model.addAttribute("currentPage", page);
+            model.addAttribute("totalPages", contacts.getTotalPages());
+            model.addAttribute("isContactAvailable", "Yes");
+        } else {
+            model.addAttribute("isContactAvailable", "No");
+        }
 
         return "normal/show_contacts";
+    }
+
+    @GetMapping("/{contactId}/contact")
+    public String getMethodName(@PathVariable("contactId") Long contactId, Model model) {
+
+        Optional<Contact> cOptional = contactRepository.findById(contactId);
+        Contact contact = cOptional.get();
+
+        model.addAttribute("title", contact.getName());
+        model.addAttribute("contact", contact);
+
+        return "normal/contact_details";
     }
 
 }
