@@ -17,13 +17,63 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-10 offset-md-1">
-                    <div class="my-card mt-4">
+                    <div class="my-card mt-4" th:if="${contact}">
+
                         <h1 class="text-center mb-4">Contacts Details</h1>
 
+                        <div class="text-center">
 
+                            <img th:src="@{'/img/' + ${contact.imageUrl}}" alt="profile-picture"
+                                class="img-fluid profile-picture-details">
 
+                            <h4 th:text="${contact.name}" class="mt-4"></h4>
 
+                            <div class="px-5 pt-4 pb-3">
+                                <table class="table px-5">
 
+                                    <tbody>
+
+                                        <tr>
+                                            <th scope="row" class="align-middle col-md-6">Id</th>
+                                            <td class="align-middle col-md-6">
+                                                <span th:text=" 'SCM' + ${contact.cId}"></span>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" class="align-middle col-md-6">Email</th>
+                                            <td class="align-middle col-md-6">
+                                                <span th:text="${contact.email}"></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" class="align-middle col-md-6">Phone</th>
+                                            <td class="align-middle col-md-6">
+                                                <span th:text="${contact.phone}"></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" class="align-middle col-md-6">Work</th>
+                                            <td class="align-middle col-md-6">
+                                                <span th:text="${contact.work}"></span>
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                        <div class="description mx-5">
+                            <h2 class="mb-3">Work description</h2>
+                            <div class="bg-light p-3" th:utext="${contact.description}"></div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="my-card mt-4" th:unless="${contact}">
+                        <h1 class="text-center mb-4">You are not authorize to access this contact!</h1>
                     </div>
                 </div>
             </div>

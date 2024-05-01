@@ -17,7 +17,7 @@ public class Contact {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long cId;
-    @Size(min = 3, max = 14, message = "Enter minimum 3 and maximum 14 characters")
+    @Size(min = 3, max = 18, message = "Enter minimum 3 and maximum 18 characters")
     private String name;
     private String secondName;
     private String work;
@@ -25,7 +25,7 @@ public class Contact {
     @Size(min = 10, max = 10, message = "Enter 10 digit phone number")
     private String phone;
     private String imageUrl;
-    @Column(length = 1000)
+    @Column(length = 5000)
     private String description;
 
     @ManyToOne

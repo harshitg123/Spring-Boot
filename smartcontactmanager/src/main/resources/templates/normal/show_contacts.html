@@ -28,7 +28,7 @@
                                     <th scope="col">Name</th>
                                     <th scope="col">Email</th>
                                     <th scope="col">Phone</th>
-                                    <th scope="col">Action</th>
+                                    <th scope="col" class="text-center">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -45,7 +45,10 @@
                                         </a>
                                     </td>
                                     <td class="align-middle" th:text="${c.phone}"></td>
-                                    <td class="align-middle">action</td>
+                                    <td class="align-middle text-center">
+                                        <a th:href="@{'/user/edit/' + ${c.cId}}"> <i
+                                                class="fa-regular fa-pen-to-square"></i> </a>
+                                    </td>
                                 </tr>
 
                             </tbody>

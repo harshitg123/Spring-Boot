@@ -17,8 +17,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8 offset-md-2">
-                    <div class="my-card mt-4">
-                        <h1 class="text-center mb-3">Add new contact</h1>
+                    <div class="my-card mt-4" th:if="${contact}">
+                        <h1 class="text-center mb-3">Edit contact details</h1>
 
                         <div class="contact-form-alert">
                             <div th:if="${message}" th:classappend="${message.type}"
@@ -30,6 +30,14 @@
 
                         <form novalidate th:action="@{/user/addContact}" method="post" th:object="${contact}"
                             enctype="multipart/form-data">
+
+                            <!-- contact id  --> <!-- Will only filld in case of edit -->
+                            <div class="input-group mb-3 d-none">
+                                <span class="input-group-text" id="cid_field"> <i class="fa-solid fa-user"></i> </span>
+                                <input type="text" class="form-control" placeholder="Enter your name"
+                                    aria-describedby="cid_field" th:value="${contact.cId}" name="cId">
+                            </div>
+
                             <!-- name -->
 
                             <div class="input-group mb-3">
@@ -100,14 +108,19 @@
                                     name="description"></textarea>
                             </div>
 
-                            <!-- Will only shown in case of add -->
+                            <!-- Will only shown in case of edit -->
 
-                            <div class="container text-center" th:if="${isEdit != 'enable'}">
-                                <button type="submit" class="btn bg-primary text-light">Submit</button>
-                                <button type="reset" class="btn btn-outline-danger">Reset</button>
+                            <div class="container text-center">
+                                <button type="submit" class="btn bg-primary text-light">Update</button>
+                                <a th:href="@{'/user/delete/' + ${contact.cId}}"
+                                    class="btn btn-outline-danger">Delete</a>
                             </div>
                         </form>
 
+                    </div>
+
+                    <div class="my-card mt-4 text-center" th:if="${isAuthorize == 'No'}">
+                        <h3>You are not authorize to perform delete action</h3>
                     </div>
                 </div>
             </div>

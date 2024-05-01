@@ -37,6 +37,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping("/user")
@@ -153,15 +154,52 @@ public class UserController {
     }
 
     @GetMapping("/{contactId}/contact")
-    public String getMethodName(@PathVariable("contactId") Long contactId, Model model) {
+    public String getMethodName(@PathVariable("contactId") Long contactId, Model model, Principal principal) {
 
         Optional<Contact> cOptional = contactRepository.findById(contactId);
         Contact contact = cOptional.get();
 
-        model.addAttribute("title", contact.getName());
-        model.addAttribute("contact", contact);
+        Long loggedInUserId = userRepository.findByEmail(principal.getName()).getId();
+        Long contactUserId = contact.getUser().getId();
+
+        if (loggedInUserId == contactUserId) {
+            model.addAttribute("title", contact.getName());
+            model.addAttribute("contact", contact);
+        } else {
+            model.addAttribute("title", "Not Authorize");
+        }
 
         return "normal/contact_details";
+    }
+
+    @GetMapping("/edit/{contactId}")
+    public String showEditForm(@PathVariable("contactId") Long contactId, Model model, Principal principal) {
+
+        Optional<Contact> cOptional = contactRepository.findById(contactId);
+        Contact contact = cOptional.get();
+
+        model.addAttribute("title", "Update - " + contact.getName());
+        model.addAttribute("contact", contact);
+        return "normal/edit_contact_form";
+    }
+
+    @GetMapping("/delete/{contactId}")
+    public String deleteContact(@PathVariable("contactId") Long contactId, Model model, Principal principal) {
+
+        Contact contact = contactRepository.findById(contactId).get();
+
+        Long loggedInUserId = userRepository.findByEmail(principal.getName()).getId();
+        Long contactUserId = contact.getUser().getId();
+
+        if (loggedInUserId == contactUserId) {
+            contactRepository.deleteById(contactId);
+            return "redirect:/user/showContacts/0";
+        } else {
+            model.addAttribute("title", "Not Authorize");
+            model.addAttribute("isAuthorize", "No");
+            return "normal/edit_contact_form";
+        }
+
     }
 
 }

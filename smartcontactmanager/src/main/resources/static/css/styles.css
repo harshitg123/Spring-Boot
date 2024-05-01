@@ -75,6 +75,13 @@ body {
   border-radius: 50%;
 }
 
+.profile-picture-details {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
 @media only screen and (max-width: 600px) {
   .side-bar {
     display: none;
