@@ -1,5 +1,14 @@
 package com.smartcontactmanager.smartcontactmanager.Controllers;
 
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -8,7 +17,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.smartcontactmanager.smartcontactmanager.Constants;
 import com.smartcontactmanager.smartcontactmanager.Dao.UserRepository;
 import com.smartcontactmanager.smartcontactmanager.Entites.User;
 import com.smartcontactmanager.smartcontactmanager.Helper.Message;
@@ -27,9 +38,12 @@ public class HomeController {
     @Autowired
     private UserRepository userRepository;
 
+    final List<String> ALLOWED_IMAGE_TYPES = Arrays.asList("image/jpeg", "image/png");
+
     @GetMapping("/")
     public String getHomePage(Model model) {
         model.addAttribute("title", "Home - Smart contact manager");
+        System.out.println(passwordEncoder.encode("harshit"));
         return "home";
     }
 
@@ -57,7 +71,7 @@ public class HomeController {
     public String registerUser(
             @Valid @ModelAttribute("user") User user, BindingResult result,
             @RequestParam(value = "tnc", defaultValue = "false") boolean tnc,
-            Model model) {
+            Model model, @RequestParam("profilePicture") MultipartFile file) {
 
         try {
 
@@ -75,6 +89,33 @@ public class HomeController {
                 return "signup";
             }
 
+            if (file.isEmpty()) {
+                user.setImageUrl("default.png");
+            } else {
+
+                if (ALLOWED_IMAGE_TYPES.contains(file.getContentType())) {
+                    Date date = new Date();
+                    String uniqueIdentifier = String.valueOf(date.getTime());
+
+                    String fileExtension[] = file.getOriginalFilename().split("\\.");
+                    user.setImageUrl(uniqueIdentifier + "." + fileExtension[fileExtension.length - 1]);
+
+                    String DIR = Constants.getFiledirectory();
+                    Path path = Paths
+                            .get(DIR + File.separator + uniqueIdentifier + "."
+                                    + fileExtension[fileExtension.length - 1]);
+                    Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+
+                    System.out.println("File saved");
+                } else {
+                    System.out.println("file type not suppported!");
+                    model.addAttribute("user", user);
+                    model.addAttribute("file", "Only .png and .jpeg file type are supported");
+                    throw new Exception("Only .png and .jpeg file type are supported");
+                }
+
+            }
+
             user.setRole("ROLE_USER");
             user.setActive(true);
             user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -89,7 +130,7 @@ public class HomeController {
         } catch (Exception e) {
             e.printStackTrace();
 
-            Message errorMessage = new Message("Something went wrong", "alert-danger");
+            Message errorMessage = new Message("Something went wrong, " + e.getMessage(), "alert-danger");
             model.addAttribute("message", errorMessage);
             model.addAttribute("user", user);
             return "signup";

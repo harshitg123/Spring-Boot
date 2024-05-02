@@ -18,7 +18,8 @@
               role="alert">
             </div>
 
-            <form novalidate th:action="@{/registerUser}" method="post" th:object="${user}">
+            <form novalidate th:action="@{/registerUser}" method="post" th:object="${user}"
+              enctype="multipart/form-data">
               <!-- name -->
 
               <div class="mb-3">
@@ -55,6 +56,11 @@
                 <div id="validationServer03Feedback" class="invalid-feedback"
                   th:each="e : ${#fields.errors('password')}" th:text="${e}">
                 </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="formFile" class="form-label">Profile picture</label>
+                <input class="form-control" type="file" id="formFile" name="profilePicture">
               </div>
 
               <!-- about -->

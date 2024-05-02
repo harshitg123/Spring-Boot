@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
 </head>
 
 <body>
@@ -17,12 +16,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-10 offset-md-1">
-                    <div class="my-card mt-4" th:if="${contact}">
+                    <div class="my-card mt-4">
 
                         <div>
-                            <h1 class="text-center mb-4">Contacts Details</h1>
+                            <h1 class="text-center mb-4">Your profile</h1>
 
-                            <form th:action="@{'/user/contact/edit/' + ${contact.cId}}" method="post" class="text-end">
+                            <form th:action="@{'/user/edit/' + ${user.id}}" method="post" class="text-end">
                                 <button type="submit" class="btn"> <i class="fa-regular fa-pen-to-square"></i>
                                 </button>
                             </form>
@@ -31,10 +30,10 @@
 
                         <div class="text-center">
 
-                            <img th:src="@{'/img/' + ${contact.imageUrl}}" alt="profile-picture"
+                            <img th:src="@{'/img/' + ${user.imageUrl}}" alt="profile-picture"
                                 class="img-fluid profile-picture-details">
 
-                            <h4 th:text="${contact.name}" class="mt-4"></h4>
+                            <h4 th:text="${user.name}" class="mt-4"></h4>
 
                             <div class="px-5 pt-4 pb-3">
                                 <table class="table px-5">
@@ -44,28 +43,32 @@
                                         <tr>
                                             <th scope="row" class="align-middle col-md-6">Id</th>
                                             <td class="align-middle col-md-6">
-                                                <span th:text=" 'SCM' + ${contact.cId}"></span>
+                                                <span th:text=" 'SCM' + ${user.id}"></span>
                                             </td>
 
                                         </tr>
                                         <tr>
                                             <th scope="row" class="align-middle col-md-6">Email</th>
                                             <td class="align-middle col-md-6">
-                                                <span th:text="${contact.email}"></span>
+                                                <span th:text="${user.email}"></span>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <th scope="row" class="align-middle col-md-6">Phone</th>
+                                            <th scope="row" class="align-middle col-md-6">Status</th>
                                             <td class="align-middle col-md-6">
-                                                <span th:text="${contact.phone}"></span>
+                                                <span th:if="${user.isActive == true}"
+                                                    class="text-success">Active</span>
+                                                <span th:if="${user.isActive == false}"
+                                                    class="test-warning">Inactive</span>
                                             </td>
                                         </tr>
+                                        <!-- 
                                         <tr>
                                             <th scope="row" class="align-middle col-md-6">Work</th>
                                             <td class="align-middle col-md-6">
                                                 <span th:text="${contact.work}"></span>
                                             </td>
-                                        </tr>
+                                        </tr> -->
 
                                     </tbody>
                                 </table>
@@ -73,15 +76,15 @@
 
                         </div>
                         <div class="description mx-5">
-                            <h2 class="mb-3">Work description</h2>
-                            <div class="bg-light p-3" th:utext="${contact.description}"></div>
+                            <h2 class="mb-3">About</h2>
+                            <div class="bg-light p-3" th:utext="${user.about}"></div>
 
                         </div>
 
                     </div>
 
-                    <div class="my-card mt-4" th:unless="${contact}">
-                        <h1 class="text-center mb-4">You are not authorize to access this contact!</h1>
+                    <div class="my-card mt-4 text-center" th:if="${isAuthorize == 'No'}">
+                        <h3>You are not authorize to perform delete action</h3>
                     </div>
                 </div>
             </div>

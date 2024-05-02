@@ -16,6 +16,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -49,6 +50,11 @@ public class UserController {
     @Autowired
     private ContactRepository contactRepository;
 
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
+
+    final List<String> ALLOWED_IMAGE_TYPES = Arrays.asList("image/jpeg", "image/png");
+
     @ModelAttribute
     public void commonData(Model model, Principal principal) {
         String username = principal.getName();
@@ -75,8 +81,6 @@ public class UserController {
             Principal principal, Model model) {
 
         try {
-
-            final List<String> ALLOWED_IMAGE_TYPES = Arrays.asList("image/jpeg", "image/png");
 
             if (result.hasErrors()) {
                 System.out.println(result);
@@ -130,6 +134,7 @@ public class UserController {
 
     }
 
+    // Contacts table
     @GetMapping("/showContacts/{page}")
     public String getAllContacts(@PathVariable("page") int page, Model model, Principal principal) {
         model.addAttribute("title", "Show user contacts");
@@ -153,6 +158,7 @@ public class UserController {
         return "normal/show_contacts";
     }
 
+    // Contact page
     @GetMapping("/{contactId}/contact")
     public String getMethodName(@PathVariable("contactId") Long contactId, Model model, Principal principal) {
 
@@ -172,7 +178,7 @@ public class UserController {
         return "normal/contact_details";
     }
 
-    @PostMapping("/edit/{contactId}")
+    @PostMapping("/contact/edit/{contactId}")
     public String showEditForm(@PathVariable("contactId") Long contactId, Model model, Principal principal) {
 
         Optional<Contact> cOptional = contactRepository.findById(contactId);
@@ -198,6 +204,181 @@ public class UserController {
             model.addAttribute("title", "Not Authorize");
             model.addAttribute("isAuthorize", "No");
             return "normal/edit_contact_form";
+        }
+
+    }
+
+    // Redirect to contacts page.
+    @PostMapping("/updateContact")
+    public String editContacts(@Valid @ModelAttribute("contact") Contact contact, BindingResult result,
+            @RequestParam("profileImage") MultipartFile file, Model model, Principal principal) {
+
+        try {
+
+            if (result.hasErrors()) {
+                System.out.println(result);
+                model.addAttribute("contact", contact);
+                return "normal/edit_contact_form";
+            }
+
+            Contact oldContact = contactRepository.findById(contact.getcId()).get();
+
+            if (file.isEmpty()) {
+                contact.setImageUrl(oldContact.getImageUrl());
+            } else {
+                if (ALLOWED_IMAGE_TYPES.contains(file.getContentType())) {
+
+                    // Delete Old Image
+                    File deleteFilePath = new ClassPathResource("/static/img").getFile();
+                    File fileObj = new File(deleteFilePath, oldContact.getImageUrl());
+                    fileObj.delete();
+
+                    // Update New Image
+                    Date date = new Date();
+                    String uniqueIdentifier = String.valueOf(date.getTime());
+
+                    String fileExtension[] = file.getOriginalFilename().split("\\.");
+                    contact.setImageUrl(uniqueIdentifier + "." + fileExtension[fileExtension.length - 1]);
+
+                    String DIR = Constants.getFiledirectory();
+                    Path path = Paths
+                            .get(DIR + File.separator + uniqueIdentifier + "."
+                                    + fileExtension[fileExtension.length - 1]);
+                    Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+
+                    System.out.println("File saved");
+                } else {
+                    System.out.println("file type not suppported!");
+                    model.addAttribute("contact", contact);
+                    model.addAttribute("file", "Only .png and .jpeg file type are supported");
+                    throw new Exception("File type not supported");
+                }
+            }
+            contact.setUser(userRepository.findByEmail(principal.getName()));
+            contactRepository.save(contact);
+
+        } catch (Exception e) {
+            model.addAttribute("contact", contact);
+            model.addAttribute("message", new Message("Something went wrong!", "alert-danger"));
+            return "normal/edit_contact_form";
+
+        }
+
+        return "redirect:/user/" + contact.getcId() + "/contact";
+    }
+
+    // Logged In user profile page
+    @GetMapping("/profile")
+    public String showUserProfile(Model model, Principal principal) {
+
+        User user = userRepository.findByEmail(principal.getName());
+
+        model.addAttribute("user", user);
+
+        model.addAttribute("title", "Your profile");
+        return "normal/profile";
+    }
+
+    // Edit form for user
+    @PostMapping("/edit/{userId}")
+    public String postMethodName(Model model, @PathVariable("userId") long userId, Principal principal) {
+
+        User loggedInUser = userRepository.findByEmail(principal.getName());
+        long loggedInUserId = loggedInUser.getId();
+
+        System.out.println(loggedInUserId);
+        System.out.println(userId);
+
+        if (userId == loggedInUserId) {
+            User user = userRepository.findById(userId).get();
+            model.addAttribute("title", "Update your profile");
+            model.addAttribute("user", user);
+            model.addAttribute("isAuthorize", "Yes");
+            System.out.println("edit form");
+            return "normal/edit_user_form";
+        } else {
+            model.addAttribute("user", loggedInUser);
+            model.addAttribute("title", "Your profile");
+            model.addAttribute("isAuthorize", "No");
+            System.out.println("redirect");
+            return "normal/profile";
+        }
+    }
+
+    // Update user details
+    @PostMapping("/updateUser")
+    public String updateUserDetais(@Valid @ModelAttribute("user") User user, BindingResult result,
+            @RequestParam("profileImage") MultipartFile file,
+            @RequestParam("updatePassword") String newPassword, Model model,
+            Principal principal) {
+
+        try {
+
+            User oldUser = userRepository.findByEmail(principal.getName());
+
+            if (result.hasErrors()) {
+                System.out.println(result);
+                model.addAttribute("user", user);
+                return "normal/edit_user_form";
+            }
+
+            if (file.isEmpty()) {
+
+                if (oldUser.getImageUrl() != null) {
+                    user.setImageUrl(oldUser.getImageUrl());
+                } else {
+                    user.setImageUrl("default.png");
+                }
+
+            } else {
+
+                if (ALLOWED_IMAGE_TYPES.contains(file.getContentType())) {
+
+                    // Delete Old Image
+                    File deleteFilePath = new ClassPathResource("/static/img").getFile();
+                    File fileObj = new File(deleteFilePath, oldUser.getImageUrl());
+                    fileObj.delete();
+
+                    // Update New Image
+                    Date date = new Date();
+                    String uniqueIdentifier = String.valueOf(date.getTime());
+
+                    String fileExtension[] = file.getOriginalFilename().split("\\.");
+                    oldUser.setImageUrl(uniqueIdentifier + "." + fileExtension[fileExtension.length - 1]);
+
+                    String DIR = Constants.getFiledirectory();
+                    Path path = Paths
+                            .get(DIR + File.separator + uniqueIdentifier + "."
+                                    + fileExtension[fileExtension.length - 1]);
+                    Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+
+                    System.out.println("File saved");
+                } else {
+                    System.out.println("file type not suppported!");
+                    model.addAttribute("contact", oldUser);
+                    model.addAttribute("file", "Only .png and .jpeg file type are supported");
+                    throw new Exception("File type not supported");
+                }
+
+            }
+
+            if (!newPassword.isEmpty()) {
+                user.setPassword(passwordEncoder.encode(newPassword));
+                System.out.println("new pwd");
+            } else {
+                user.setPassword(user.getPassword());
+                System.out.println("old pwd");
+            }
+
+            user.setContacts(oldUser.getContacts());
+            userRepository.save(user);
+            model.addAttribute("user", user);
+            return "redirect:/user/profile";
+
+        } catch (Exception e) {
+            model.addAttribute("user", user);
+            model.addAttribute("message", new Message("Something went wrong!", "alert-danger"));
+            return "normal/edit_user_form";
         }
 
     }

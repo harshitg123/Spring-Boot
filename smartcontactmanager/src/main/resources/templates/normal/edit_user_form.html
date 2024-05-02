@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{normal/base::layout(~{::section})}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <section>
+        <div class="closeHam">
+            <i onclick="toggleButton()" class="fa-solid fa-bars close"></i>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <div class="my-card mt-4" th:if="${isAuthorize == 'Yes'}">
+                        <h1 class="text-center mb-3">Edit user details</h1>
+
+                        <div class="contact-form-alert">
+                            <div th:if="${message}" th:classappend="${message.type}"
+                                class="alert d-flex justify-content-between" role="alert">
+                                <span th:text="${message.content}"></span>
+                                <span><i class="fa-solid fa-xmark close" onclick="closeAlert()"></i></span>
+                            </div>
+                        </div>
+
+                        <form novalidate th:action="@{/user/updateUser}" method="post" th:object="${user}"
+                            enctype="multipart/form-data">
+
+                            <!-- user id  --> <!-- Will only filld in case of edit -->
+                            <div class="input-group mb-3 d-none">
+                                <span class="input-group-text" id="id_field"> <i class="fa-solid fa-user"></i> </span>
+                                <input type="text" class="form-control" placeholder="Enter your name"
+                                    aria-describedby="id_field" th:value="${user.id}" name="id">
+                            </div>
+
+                            <!-- name -->
+
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="name_field"> <i class="fa-solid fa-user"></i> </span>
+                                <input type="text" class="form-control" placeholder="Enter your name"
+                                    aria-describedby="name_field" th:value="${user.name}" name="name"
+                                    th:classappend="${#fields.hasErrors('name') ? 'is-invalid' : ''}">
+
+                                <div id="validationServer03Feedback" class="invalid-feedback"
+                                    th:each="e : ${#fields.errors('name')}" th:text="${e}">
+                                </div>
+                            </div>
+
+                            <!-- email -->
+
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="email_field"> <i class="fa-solid fa-envelope"></i>
+                                </span>
+                                <input type="email" class="form-control" placeholder="Enter your email" name="email"
+                                    aria-label="email" aria-describedby="email_field" th:value="${user.email}">
+                            </div>
+
+                            <!-- password -->
+
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="password_field"> <i class="fa-solid fa-lock"></i>
+                                </span>
+                                <input type="password" class="form-control" placeholder="Enter new password"
+                                    aria-label="password" aria-describedby="password_field" name="updatePassword">
+                            </div>
+
+                            <!-- upload image -->
+                            <div class="mb-3">
+                                <input class="form-control" type="file" id="formFile" name="profileImage">
+                            </div>
+
+                            <!-- about -->
+                            <div class="form-floating mb-3">
+                                <textarea class="form-control" placeholder="Enter work description" id="mytextarea"
+                                    rows="4" style="height: 100px" th:text="${user.about}" name="about"></textarea>
+                            </div>
+
+                            <!-- Will only shown in case of edit -->
+
+                            <div class="container text-center">
+                                <button type="submit" class="btn bg-primary text-light">Update</button>
+                            </div>
+                        </form>
+
+                    </div>
+
+                    <div class="my-card mt-4 text-center" th:if="${isAuthorize == 'No'}">
+                        <h3>You are not authorize to perform delete action</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="https://cdn.tiny.cloud/1/p43jetttix5kbmowxgl220tarqr3t5huj5sad0az3iokigqx/tinymce/7/tinymce.min.js"
+            referrerpolicy="origin">
+            </script>
+        <script>
+            tinymce.init({
+                selector: '#mytextarea'
+            });
+        </script>
+    </section>
+
+</body>
+
+</html>
