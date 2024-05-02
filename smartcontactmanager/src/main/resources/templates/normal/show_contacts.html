@@ -46,8 +46,11 @@
                                     </td>
                                     <td class="align-middle" th:text="${c.phone}"></td>
                                     <td class="align-middle text-center">
-                                        <a th:href="@{'/user/edit/' + ${c.cId}}"> <i
-                                                class="fa-regular fa-pen-to-square"></i> </a>
+                                        <form th:action="@{'/user/edit/' + ${c.cId}}" method="post">
+                                            <button type="submit" class="btn"> <i
+                                                    class="fa-regular fa-pen-to-square"></i>
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
 

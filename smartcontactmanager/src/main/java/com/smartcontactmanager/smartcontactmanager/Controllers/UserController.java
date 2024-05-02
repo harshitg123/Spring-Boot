@@ -172,7 +172,7 @@ public class UserController {
         return "normal/contact_details";
     }
 
-    @GetMapping("/edit/{contactId}")
+    @PostMapping("/edit/{contactId}")
     public String showEditForm(@PathVariable("contactId") Long contactId, Model model, Principal principal) {
 
         Optional<Contact> cOptional = contactRepository.findById(contactId);
