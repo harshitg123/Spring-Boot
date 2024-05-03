@@ -18,12 +18,69 @@
             <div class="row">
                 <div class="col-md-10 offset-md-1">
                     <div class="my-card mt-4">
-                        <h1 class="text-center mb-3">Edit user details</h1>
+
+                        <div th:if="${contactsFound == true}">
+                            <div class="text-center">
+                                <h1 class="text-center mb-3">Your dashboard</h1>
+                                <p class="text-secondary">Add your contact to cloud and access it from anywhere in the
+                                    world.</p>
+                            </div>
+
+                            <div class="contact-insights d-flex justify-content-around mx-3 mt-5 mb-3">
+
+                                <div class="card text-center w-25">
+                                    <div class="card-body">
+                                        <h3 class="mb-3">
+                                            <span th:text="${userContacts}"></span>
+                                            <i class="fa-solid fa-address-book dashboard-icon text-primary"></i>
+                                        </h3>
+                                        <div class="text-secondary fw-light">You have added <span
+                                                th:text="${userContacts}"></span> contacts</div>
+                                    </div>
+                                </div>
+
+                                <div class="card text-center w-25">
+                                    <div class="card-body" th:if="${isActive == true}">
+                                        <h3 class="text-success mb-3">Active
+                                            <i class="fa-solid fa-user-check text-success dashboard-icon"></i>
+                                        </h3>
+                                        <div class="text-secondary fw-light">You have the access to add new
+                                            contacts</div>
+                                    </div>
+                                </div>
+                                <div class="card-body" th:if="${isActive == fasle}">
+                                    <h3 class="text-success mb-3">Inactive
+                                        <i class=" fa-solid fa-user-check text-success dashboard-icon"></i>
+                                    </h3>
+                                    <div class="text-secondary fw-light">You dosen't have the access to add new
+                                        contacts</div>
+                                </div>
+                            </div>
 
 
+
+                        </div>
+
+
+                        <div th:if="${contactsFound == false}">
+                            <div class="text-center">
+                                <h1 class="text-center mb-3">Your dashboard</h1>
+                                <p class="text-secondary mb-4">Add your contact to cloud and access it from anywhere in
+                                    the
+                                    world.</p>
+                                <div class="mt-5 mb-4">
+                                    <p class="text-secondary">You haven't added any contacts yet</p>
+                                    <a th:href="@{/user/addContact}" class="btn bg-primary text-light" type="submit">Add
+                                        contact</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
+                    <div></div>
                 </div>
             </div>
+        </div>
     </section>
 </body>
 

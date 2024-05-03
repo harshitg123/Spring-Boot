@@ -43,7 +43,6 @@ public class HomeController {
     @GetMapping("/")
     public String getHomePage(Model model) {
         model.addAttribute("title", "Home - Smart contact manager");
-        System.out.println(passwordEncoder.encode("harshit"));
         return "home";
     }
 

@@ -82,6 +82,10 @@ body {
   border-radius: 50%;
 }
 
+.dashboard-icon {
+  transform: scale(0.8);
+}
+
 @media only screen and (max-width: 600px) {
   .side-bar {
     display: none;

@@ -20,7 +20,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.smartcontactmanager.smartcontactmanager.Constants;
 import com.smartcontactmanager.smartcontactmanager.Dao.ContactRepository;
@@ -30,15 +36,6 @@ import com.smartcontactmanager.smartcontactmanager.Entites.User;
 import com.smartcontactmanager.smartcontactmanager.Helper.Message;
 
 import jakarta.validation.Valid;
-
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping("/user")
@@ -65,6 +62,26 @@ public class UserController {
     @GetMapping("/dashboard")
     public String userDashboard(Model model, Principal principal) {
         model.addAttribute("title", "User dashboard");
+
+        try {
+            User user = userRepository.findByEmail(principal.getName());
+            Boolean isUserActive = user.isActive();
+
+            Long userContactsCount = (long) user.getContacts().size();
+
+            if (userContactsCount > 0) {
+                model.addAttribute("userContacts", userContactsCount);
+                model.addAttribute("isActive", isUserActive);
+                model.addAttribute("contactsFound", true);
+            } else {
+                throw new Exception("No contacts found");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            model.addAttribute("contactsFound", false);
+        }
+
         return "normal/user-dashboard";
     }
 
