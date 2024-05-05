@@ -28,4 +28,6 @@ public class EmailController {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong");
     }
 
+    // Create new API uding the latest method uring spring boot starter dependency
+
 }
