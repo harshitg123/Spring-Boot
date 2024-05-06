@@ -1,14 +1,11 @@
 package com.emailapi.service;
 
 import java.io.File;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Properties;
 
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
-import io.github.cdimascio.dotenv.Dotenv;
 import jakarta.mail.Authenticator;
 import jakarta.mail.Message;
 import jakarta.mail.MessagingException;
@@ -25,10 +22,15 @@ public class EmailService {
 
     public boolean sendEmail(String to, String subject, String message) {
 
-        Dotenv dotenv = Dotenv.load();
+        // Dotenv dotenv = Dotenv.load();
 
-        String from = dotenv.get("EMAIL_FROM");
-        String emailPwd = dotenv.get("EMAIL_PWD");
+        // String from = dotenv.get("EMAIL_FROM");
+        // String emailPwd = dotenv.get("EMAIL_PWD");
+
+        String from = System.getProperty("EMAIL_FROM");
+        String emailPwd = System.getProperty("EMAIL_PWD");
+
+        System.out.println();
 
         // return sendEmailText(from, to, subject, message, emailPwd);
         return sendEmailAttachment(from, to, subject, message, emailPwd);
