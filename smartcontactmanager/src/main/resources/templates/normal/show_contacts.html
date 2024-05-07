@@ -20,6 +20,16 @@
                     <div class="my-card mt-4">
                         <h1 class="text-center mb-4">Your contacts</h1>
 
+                        <div class="search-container">
+
+                            <input onkeyup="search()" type="text" id="search-input" class="form-control"
+                                placeholder="Search here">
+
+                            <div class="search-result">
+
+                            </div>
+
+                        </div>
 
                         <table class="table" th:if="${isContactAvailable == 'Yes'}">
                             <thead>

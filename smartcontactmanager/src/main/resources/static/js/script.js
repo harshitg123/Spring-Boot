@@ -47,3 +47,45 @@ const deleteAlert = (cId) => {
         }
       });
 }
+
+const search = () => {
+
+  let query = $("#search-input").val()
+
+  if (query == "") {
+    $(".search-result").hide()
+  } else {
+
+    let url = `http://localhost:8080/search/${query}`;
+
+    fetch(url)
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+
+      console.log(data);
+
+      if (data.length > 0) {
+        let html = `<div class='list-group'>`;
+      
+        data.forEach(contact => {
+          html += `<a href='/user/${contact.cId}/contact' class='list-group-item list-group-item-action'> ${contact.name} </a>`
+          });
+        html += `</div>`
+
+        $(".search-result").html(html)
+      } else {
+
+        html = `<p class='text-secondary'> No result found </p>`;
+        $(".search-result").html(html)
+
+      }
+
+      $(".search-result").show()
+    });
+
+
+    
+  }
+};
