@@ -6,27 +6,22 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-
-import jakarta.servlet.FilterChain;
 
 @Configuration
 public class SecurityConfig {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        UserDetails user = User.builder().username("harshit").password("test").build();
-        return new InMemoryUserDetailsManager(user);
+        UserDetails adminUser = User.builder().username("harshit").password(passwordEncoder().encode("abc"))
+                .roles("ADMIN").build();
+        return new InMemoryUserDetailsManager(adminUser);
     }
 
     @Bean
-    public BCryptPasswordEncoder encodePassword() {
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
-    }
-
-    @Bean
-    public FilterChain HttpRequest() {
-        return null;
     }
 
 }
